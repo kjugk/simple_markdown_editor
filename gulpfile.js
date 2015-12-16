@@ -15,10 +15,10 @@ var b = watchify(browserify({
   entries: ['./index.js'],
   debug: true
 }))
-.transform(bebelify)
+.transform("babelify", {presets: ["es2015", "react"]})
 .transform(reactify)
-.on('update', bundle);
-.on('log', gutil.log);
+.on('update', bundle)
+.on('log', gutil.log)
 
 function bundle(){
   return b.bundle()
