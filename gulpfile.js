@@ -15,8 +15,7 @@ var b = watchify(browserify({
   entries: ['./index.js'],
   debug: true
 }))
-.transform("babelify", {presets: ["es2015", "react"]})
-.transform(reactify)
+.transform("babelify")
 .on('update', bundle)
 .on('log', gutil.log)
 
