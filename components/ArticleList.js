@@ -1,17 +1,22 @@
 import React, { PropTypes, Component } from 'react'
 
 class ArticleList extends Component{
-  handleItemClick(id){
-    const { onItemClick } = this.props
-    onItemClick(id)
+  getText(body){
+    return body ? body : "未設定"
   }
+
   render(){
-    const { items } = this.props
+    const { items, onItemClick } = this.props
+
     return(
       <ul>
-        {items.map(article =>
-          <li key={article.id}
-              onClick={()=>{this.handleItemClick(article.id)}}>{article.body}</li>
+        {items.map(
+          (article)=>{
+            return(<li key={article.id}
+                       onClick={()=>{onItemClick(article.id)}}>
+                         {this.getText(article.body)}
+                   </li>)
+          }
         )}
       </ul>
     )
