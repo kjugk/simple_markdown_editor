@@ -1,15 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import AppProgress from '../components/AppProgress'
 import ArticleViewer from '../components/ArticleViewer'
 import ArticleEditor from '../components/ArticleEditor'
 import { selectArticle, fetchArticles, createArticle, editArticle, saveArticle, deleteArticle } from '../actions/articles'
 
 class App extends Component {
-  componentDidMount(){
-    const { dispatch } = this.props
-    dispatch(fetchArticles())
-  }
-
   handleItemSelect(id){
     const { dispatch } = this.props
     dispatch(selectArticle(id))
@@ -35,12 +31,19 @@ class App extends Component {
     dispatch(deleteArticle(id))
   }
 
+  componentWillMount(){
+    const { dispatch } = this.props
+    dispatch(fetchArticles())
+  }
+
   render(){
     const { selectedArticle, articles } = this.props
 
     return(
       <div className="app">
-        {!articles.isEditing &&
+        <AppProgress visible={articles.isFetching} />
+
+        {!articles.isFetching && !articles.isEditing &&
           <ArticleViewer articles={articles}
                          selectedArticle={selectedArticle}
                          onSelect={this.handleItemSelect.bind(this)}
@@ -48,7 +51,7 @@ class App extends Component {
                          onEdit={this.handleEdit.bind(this)}
                          onDelete={this.handleDelete.bind(this)} />
         }
-        {articles.isEditing &&
+        {!articles.isFetching && articles.isEditing &&
           <ArticleEditor article={selectedArticle}
                          onSave={this.handleSave.bind(this)} />
         }

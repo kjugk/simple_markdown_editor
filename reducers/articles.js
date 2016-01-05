@@ -1,7 +1,8 @@
-import { RECEIVE_ARTICLES, SELECT_ARTICLE,
+import { FETCH_ARTICLES, RECEIVE_ARTICLES, SELECT_ARTICLE,
          CREATE_ARTICLE, EDIT_ARTICLE, SAVE_ARTICLE, DELETE_ARTICLE } from '../actions/articles'
 
 const initialState = {
+  isFetching: false,
   isEditing: false,
   selectedId: undefined,
   items: []
@@ -9,9 +10,14 @@ const initialState = {
 
 export default function articles(state = initialState, action) {
   switch (action.type) {
-    case RECEIVE_ARTICLES:
-      //TODO 0件の場合を考慮
+    case FETCH_ARTICLES:
       return Object.assign({}, state, {
+        isFetching: true
+      })
+
+    case RECEIVE_ARTICLES:
+      return Object.assign({}, state, {
+        isFetching: false,
         selectedId: action.articles.length >= 1 ? action.articles[0].id : undefined,
         items: action.articles
       })

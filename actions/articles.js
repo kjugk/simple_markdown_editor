@@ -1,6 +1,7 @@
 import shortid from 'shortid'
 import * as Storage from '../utils/storage'
 
+export const FETCH_ARTICLES = 'FETCH_ARTICLES'
 export const RECEIVE_ARTICLES = 'RECEIVE_ARTICLES'
 export const SELECT_ARTICLE = 'SELECT_ARTICLES'
 export const CREATE_ARTICLE = 'CREATE_ARTICLE'
@@ -9,8 +10,13 @@ export const SAVE_ARTICLE = 'SAVE_ARTICLE'
 export const DELETE_ARTICLE = 'DELETE_ARTICLE'
 
 export function fetchArticles() {
-  const articles = Storage.getArticles()
-  return {type: RECEIVE_ARTICLES, articles}
+  return (dispatch)=>{
+    dispatch({type: FETCH_ARTICLES})
+    setTimeout(()=>{
+      const articles = Storage.getArticles()
+      return dispatch({type: RECEIVE_ARTICLES, articles})
+    }, 1500);
+  }
 }
 
 export function selectArticle(articleId) {
