@@ -26,13 +26,12 @@ class ArticleEditor extends Component{
   render(){
     const { article } = this.props
     return(
-      <div>
-        <div style={{width: "500px", float: "left"}}>
+      <div style={{padding: "5px"}}>
+        <div style={{height: "100%", width: "50%", float: "left",paddingRight: "5px", borderRight: "1px solid #EEE"}}>
           <TextField ref="articleBody"
                      fullWidth={true}
                      multiLine={true}
-                     rows={2}
-                     hintText="First line is title."
+                     hintText="最初の行がタイトルになればいいのに"
                      onChange={this.handleChange}
                      defaultValue={this.state.body} />
 
@@ -42,7 +41,7 @@ class ArticleEditor extends Component{
         </div>
 
         <div className="markdown-body"
-             style={{paddingLeft: "10px", width: "500px", overflow: "hidden"}}
+             style={{paddingLeft: "10px", overflow: "hidden"}}
              dangerouslySetInnerHTML={{__html: marked(this.state.body)}} />
       </div>
     )
