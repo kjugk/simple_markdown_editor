@@ -12,7 +12,7 @@ export default function articles(state = initialState, action) {
     case RECEIVE_ARTICLES:
       //TODO 0件の場合を考慮
       return Object.assign({}, state, {
-        selectedId: action.articles[0].id,
+        selectedId: action.articles.length >= 1 ? action.articles[0].id : undefined,
         items: action.articles
       })
 

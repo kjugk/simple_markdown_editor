@@ -25,6 +25,7 @@ class ArticleEditor extends Component{
     return(
       <div>
         <div style={{width: "500px", float: "left"}}>
+          <input type="button" value="save" onClick={this.handleSave} />
           <textarea ref="articleBody"
                     onChange={this.handleChange}
                     defaultValue={this.state.body} /><br />
@@ -32,7 +33,7 @@ class ArticleEditor extends Component{
           <input type="button" value="save" onClick={this.handleSave} />
         </div>
 
-        <div style={{width: "500px", overflow: "hidden"}}
+        <div className="markdown-body" style={{paddingLeft: "10px", width: "500px", overflow: "hidden"}}
              dangerouslySetInnerHTML={{__html: marked(this.state.body)}} />
       </div>
     )

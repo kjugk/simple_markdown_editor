@@ -6,15 +6,25 @@ class ArticleList extends Component{
   }
 
   render(){
-    const { items, onItemClick } = this.props
+    const { articles, onItemClick } = this.props
+    const { items } = articles
+
+    function getClassName(item){
+      let name = "article-list-item"
+      if(item.id === articles.selectedId){
+        return `${name} selected`
+      }
+      return name
+    }
 
     return(
-      <ul>
+      <ul className="article-list">
         {items.map(
           (article)=>{
             return(<li key={article.id}
+                       className={getClassName(article)}
                        onClick={()=>{onItemClick(article.id)}}>
-                         {this.getText(article.body)}
+                    {this.getText(article.body)}
                    </li>)
           }
         )}
@@ -24,7 +34,7 @@ class ArticleList extends Component{
 }
 
 ArticleList.propTypes = {
-  items: PropTypes.array.isRequired,
+  articles: PropTypes.object.isRequired,
   onItemClick: PropTypes.func.isRequired
 }
 

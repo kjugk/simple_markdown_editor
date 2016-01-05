@@ -40,15 +40,17 @@ class App extends Component {
     const { selectedArticle, articles } = this.props
 
     return(
-      <div>
+      <div className="app">
         {!articles.isEditing &&
           <div>
-            <div style={{width: "200px", float: "left"}}>
-              <input type="button" value="create" onClick={this.handleCreate.bind(this)} />
-              <ArticleList items={articles.items} onItemClick={this.handleItemSelect.bind(this)} />
+            <div className="article-list-area">
+              <div style={{paddingLeft: "5px"}}>
+                <input type="button" value="create" onClick={this.handleCreate.bind(this)} />
+              </div>
+              <ArticleList articles={articles} onItemClick={this.handleItemSelect.bind(this)} />
             </div>
 
-            <div style={{width: "500px", overflow: "hidden"}}>
+            <div className="article-preview-area">
               { selectedArticle &&
                 <ArticleViewer article={selectedArticle}
                                onEdit={this.handleEdit.bind(this)}

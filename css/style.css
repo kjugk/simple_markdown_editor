@@ -1,0 +1,47 @@
+ul{
+  padding: 0
+}
+
+textarea{
+  width: 100%;
+  height: 100%;
+  font-size: 1.0em;
+}
+
+.app{
+  min-height: 500px;
+  overflow: scroll;
+}
+
+.article-list-area{
+  height: 100%;
+  width: 200px;
+  border-left: 1px solid #EEE;
+  border-right: 1px solid #EEE;
+  float: left;
+}
+
+.article-list{
+  border-top: 1px solid #EEE;
+}
+
+.article-list-item{
+  overflow: hidden;
+  padding: 2px 5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid #EEE;
+  cursor: pointer;
+}
+.article-list-item.selected{
+  background-color: #EEE;
+}
+.article-list-item:hover{
+  background-color: #CCC;
+}
+
+.article-preview-area{
+  width: 500px;
+  padding-left: 10px;
+  overflow: hidden;
+}

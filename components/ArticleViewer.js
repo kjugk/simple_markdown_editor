@@ -20,12 +20,11 @@ class ArticleViewer extends Component{
 
   render(){
     const { article } = this.props
-
     return(
       <div>
         <input type="button" value="edit" onClick={this.handleEdit} />
         <input type="button" value="delete" onClick={this.handleDelete} />
-        <div dangerouslySetInnerHTML={{__html: marked(article.body)}} />
+        <div className="markdown-body" dangerouslySetInnerHTML={{__html: marked(article.body)}} />
       </div>
     )
   }

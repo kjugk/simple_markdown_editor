@@ -1,5 +1,6 @@
 import store from 'store'
 import shortid from 'shortid'
+import * as Storage from '../utils/storage'
 
 export const RECEIVE_ARTICLES = 'RECEIVE_ARTICLES'
 export const SELECT_ARTICLE = 'SELECT_ARTICLES'
@@ -9,12 +10,8 @@ export const SAVE_ARTICLE = 'SAVE_ARTICLE'
 export const DELETE_ARTICLE = 'DELETE_ARTICLE'
 
 export function fetchArticles() {
-  return (dispatch, getState)=>{
-    dispatch({type: RECEIVE_ARTICLES, articles: [
-      {id: 1, body: "### hoge\nfoo"},
-      {id: 2, body: "fuga"}
-    ]})
-  }
+  const articles = Storage.getArticles()
+  return {type: RECEIVE_ARTICLES, articles}
 }
 
 export function selectArticle(articleId) {
@@ -23,6 +20,8 @@ export function selectArticle(articleId) {
 
 export function createArticle() {
   const article = {id: shortid.generate(), body: ""}
+  Storage.setArticle(article)
+
   return {type: CREATE_ARTICLE, article}
 }
 
@@ -31,9 +30,11 @@ export function editArticle(articleId) {
 }
 
 export function saveArticle(articleId, body) {
+  Storage.updateArticle(articleId, body)
   return {type: SAVE_ARTICLE, articleId, body}
 }
 
 export function deleteArticle(articleId){
+  Storage.deleteArticle(articleId)
   return {type: DELETE_ARTICLE, articleId}
 }
