@@ -1,4 +1,7 @@
 import React, { PropTypes, Component } from 'react'
+import List from 'material-ui/lib/lists/list';
+import Divider from 'material-ui/lib/divider';
+import ListItem from 'material-ui/lib/lists/list-item';
 
 class ArticleList extends Component{
   getText(body){
@@ -18,17 +21,19 @@ class ArticleList extends Component{
     }
 
     return(
-      <ul className="article-list">
+      <List style={{paddingTop: "0"}}>
         {items.map(
           (article)=>{
-            return(<li key={article.id}
+            return(<div key={article.id}>
+                    <ListItem
                        className={getClassName(article)}
-                       onClick={()=>{onItemClick(article.id)}}>
-                    {this.getText(article.body)}
-                   </li>)
+                       onTouchTap={()=>{onItemClick(article.id)}}
+                       primaryText={this.getText(article.body)} />
+                    <Divider />
+                  </div>)
           }
         )}
-      </ul>
+      </List>
     )
   }
 }

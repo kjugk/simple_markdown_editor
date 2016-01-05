@@ -1,4 +1,3 @@
-import store from 'store'
 import shortid from 'shortid'
 import * as Storage from '../utils/storage'
 

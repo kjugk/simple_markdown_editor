@@ -1,39 +1,47 @@
 import React, { PropTypes, Component } from 'react'
 import marked from 'marked'
 
+import ArticleList from '../components/ArticleList'
+import ArticleDisplay from '../components/ArticleDisplay'
+import RaisedButton from 'material-ui/lib/raised-button';
+
 class ArticleViewer extends Component{
-  constructor(props){
-    super(props)
-    this.handleDelete = this.handleDelete.bind(this)
-    this.handleEdit = this.handleEdit.bind(this)
-  }
-
-  handleEdit(){
-    const { article, onEdit } = this.props
-    onEdit(article.id)
-  }
-
-  handleDelete(){
-    const { article, onDelete } = this.props
-    onDelete(article.id)
-  }
 
   render(){
-    const { article } = this.props
+    const{ articles, selectedArticle, onSelect, onCreate, onEdit, onDelete } = this.props
+
     return(
       <div>
-        <input type="button" value="edit" onClick={this.handleEdit} />
-        <input type="button" value="delete" onClick={this.handleDelete} />
-        <div className="markdown-body" dangerouslySetInnerHTML={{__html: marked(article.body)}} />
+        <div className="article-list-area">
+          <div style={{borderBottom: "1px solid #EEE", padding: "10px"}}>
+            <RaisedButton label="create"
+                          fullWidth={true}
+                          primary={true}
+                          onTouchTap={onCreate} />
+          </div>
+          <ArticleList articles={articles}
+                       onItemClick={onSelect} />
+        </div>
+
+        <div className="article-preview-area">
+          { selectedArticle &&
+            <ArticleDisplay article={selectedArticle}
+                            onEdit={onEdit}
+                            onDelete={onDelete} />
+          }
+        </div>
       </div>
     )
   }
 }
 
 ArticleViewer.propTypes = {
-  article: PropTypes.object.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired
+  articles: PropTypes.object.isRequired,
+  selectedArticle: PropTypes.object,
+  onSelect: PropTypes.func.isRequired,
+  onCreate: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
 }
 
 export default ArticleViewer

@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import marked from 'marked'
+import TextField from 'material-ui/lib/text-field'
+import RaisedButton from 'material-ui/lib/raised-button';
 
 class ArticleEditor extends Component{
   constructor(props){
@@ -14,26 +16,33 @@ class ArticleEditor extends Component{
     onSave(article.id, this.state.body)
   }
 
-  handleChange(){
-    const body = this.refs.articleBody.value.trim()
+  handleChange(e){
+    e.stopPropagation()
+    e.preventDefault()
+    const body = this.refs.articleBody.getValue().trim()
     this.setState({body})
   }
 
   render(){
     const { article } = this.props
-
     return(
       <div>
         <div style={{width: "500px", float: "left"}}>
-          <input type="button" value="save" onClick={this.handleSave} />
-          <textarea ref="articleBody"
-                    onChange={this.handleChange}
-                    defaultValue={this.state.body} /><br />
+          <TextField ref="articleBody"
+                     fullWidth={true}
+                     multiLine={true}
+                     rows={2}
+                     hintText="First line is title."
+                     onChange={this.handleChange}
+                     defaultValue={this.state.body} />
 
-          <input type="button" value="save" onClick={this.handleSave} />
+          <RaisedButton primary={true}
+                        label="save"
+                        onTouchTap={this.handleSave} />
         </div>
 
-        <div className="markdown-body" style={{paddingLeft: "10px", width: "500px", overflow: "hidden"}}
+        <div className="markdown-body"
+             style={{paddingLeft: "10px", width: "500px", overflow: "hidden"}}
              dangerouslySetInnerHTML={{__html: marked(this.state.body)}} />
       </div>
     )

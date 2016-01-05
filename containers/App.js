@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import ArticleList from '../components/ArticleList'
 import ArticleViewer from '../components/ArticleViewer'
 import ArticleEditor from '../components/ArticleEditor'
 import { selectArticle, fetchArticles, createArticle, editArticle, saveArticle, deleteArticle } from '../actions/articles'
@@ -42,22 +41,12 @@ class App extends Component {
     return(
       <div className="app">
         {!articles.isEditing &&
-          <div>
-            <div className="article-list-area">
-              <div style={{paddingLeft: "5px"}}>
-                <input type="button" value="create" onClick={this.handleCreate.bind(this)} />
-              </div>
-              <ArticleList articles={articles} onItemClick={this.handleItemSelect.bind(this)} />
-            </div>
-
-            <div className="article-preview-area">
-              { selectedArticle &&
-                <ArticleViewer article={selectedArticle}
-                               onEdit={this.handleEdit.bind(this)}
-                               onDelete={this.handleDelete.bind(this)} />
-              }
-            </div>
-          </div>
+          <ArticleViewer articles={articles}
+                         selectedArticle={selectedArticle}
+                         onSelect={this.handleItemSelect.bind(this)}
+                         onCreate={this.handleCreate.bind(this)}
+                         onEdit={this.handleEdit.bind(this)}
+                         onDelete={this.handleDelete.bind(this)} />
         }
         {articles.isEditing &&
           <ArticleEditor article={selectedArticle}
