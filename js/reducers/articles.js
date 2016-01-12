@@ -1,5 +1,5 @@
-import { FETCH_ARTICLES, RECEIVE_ARTICLES, SELECT_ARTICLE,
-         CREATE_ARTICLE, EDIT_ARTICLE, SAVE_ARTICLE, DELETE_ARTICLE } from '../actions/articles'
+import { FETCH_ARTICLES, RECEIVE_ARTICLES, SELECT_ARTICLE, CANCEL_EDIT,
+         CREATE_ARTICLE, EDIT_ARTICLE, UPDATE_ARTICLE, DELETE_ARTICLE } from '../actions/articles'
 
 const initialState = {
   isFetching: false,
@@ -40,7 +40,7 @@ export default function articles(state = initialState, action) {
         selectedId: action.articleId,
       })
 
-    case SAVE_ARTICLE:
+    case UPDATE_ARTICLE:
       return Object.assign({}, state, {
         isEditing: false,
         selectedId: action.articleId,
@@ -48,7 +48,7 @@ export default function articles(state = initialState, action) {
           if(item.id !== action.articleId){
             return item
           } else {
-            return {...item, body: action.body, updatedAt: action.updatedAt }
+            return { ...item, body: action.body, updatedAt: action.updatedAt }
           }
         })
       })
@@ -60,7 +60,19 @@ export default function articles(state = initialState, action) {
         selectedId: newItems.length >= 1 ? newItems[0].id : undefined
       })
 
+    case CANCEL_EDIT:
+      return Object.assign({}, state, {
+        isEditing: false
+      })
+
     default:
       return state
   }
+}
+
+export function getSelectedArticle(state){
+  const selectedId = state.articles.selectedId
+  if(selectedId == undefined) {return null}
+
+  return state.articles.items.filter((a)=>{return a.id === selectedId})[0]
 }

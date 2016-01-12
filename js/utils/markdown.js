@@ -1,6 +1,7 @@
 import marked from 'marked'
+import high from 'highlight.js'
+
 export function configMarked(){
-  var high = require('highlight.js')
   high.initHighlightingOnLoad()
 
   marked.setOptions({

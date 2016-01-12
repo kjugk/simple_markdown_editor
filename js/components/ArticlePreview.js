@@ -13,7 +13,7 @@ class ArticlePreview extends Component{
 }
 
 ArticlePreview.propTypes = {
-  articleBody: PropTypes.object.isRequired
+  articleBody: PropTypes.string.isRequired
 }
 
 export default ArticlePreview

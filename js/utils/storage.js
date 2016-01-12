@@ -6,7 +6,7 @@ export function getArticles(){
 
 export function setArticle(article){
   let articles = getArticles()
-  store.set('articles', [article].concat(articles))
+  store.set('articles', [article, ...articles])
 }
 
 export function updateArticle(articleId, body){

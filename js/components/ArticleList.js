@@ -4,8 +4,9 @@ import Divider from 'material-ui/lib/divider';
 import ListItem from 'material-ui/lib/lists/list-item';
 
 class ArticleList extends Component{
-  getText(body){
-    return body ? body : "未設定"
+  getTitle(body){
+    let title = body.split(/\n/)[0]
+    return title ? title : "未設定"
   }
 
   render(){
@@ -28,7 +29,7 @@ class ArticleList extends Component{
                     <ListItem
                        className={getClassName(article)}
                        onTouchTap={()=>{onItemClick(article.id)}}
-                       primaryText={this.getText(article.body)} />
+                       primaryText={this.getTitle(article.body)} />
                     <Divider />
                   </div>)
           }

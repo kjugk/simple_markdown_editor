@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import moment from 'moment'
 import RaisedButton from 'material-ui/lib/raised-button';
+import IconButton from 'material-ui/lib/icon-button';
 
 class ArticleControll extends Component{
   constructor(props){
@@ -22,12 +23,16 @@ class ArticleControll extends Component{
   render(){
     const { article } = this.props
     return(
-      <div style={{padding: "10px", boxSizing: "border-box", minHeight: "57px", borderBottom: "1px solid #EEE"}}>
-        <div style={{float: "left"}}>
-          <RaisedButton label="edit" onTouchTap={this.handleEdit} />
-          <RaisedButton style={{marginLeft: "10px"}} label="delete" onTouchTap={this.handleDelete} />
-        </div>
-        <div style={{overflow: "hidden", fontSize: "0.8em", textAlign: "right"}}>
+      <div style={{borderBottom: "1px solid #EEE", position: "relative"}}>
+        <IconButton iconClassName="material-icons"
+                    tooltip="edit"
+                    onTouchTap={this.handleEdit}>mode_edit</IconButton>
+
+        <IconButton iconClassName="material-icons"
+                    tooltip="delete"
+                    onTouchTap={this.handleDelete}>delete</IconButton>
+
+        <div style={{fontSize: "0.8em", position: "absolute", right: "5px", bottom: "5px"}}>
           更新日:{moment(article.updatedAt).format('YYYY/MM/DD HH:mm:ss')}
         </div>
       </div>

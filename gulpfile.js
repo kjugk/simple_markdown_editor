@@ -9,16 +9,27 @@ var bebelify = require('babelify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
+var uglify = require('gulp-uglify');
 
-var b = watchify(browserify({
+var b = browserify({
   entries: ['./js/index.js'],
-  transform: ['babelify'],
-  debug: true,
-}))
-.on('update', bundle)
-.on('log', gutil.log)
+  transform: ['babelify']
+})
+
+function productionBuild(){
+  return b.bundle()
+    .on('error', gutil.log.bind(gutil, 'Browserify Error')  )
+    .pipe(source('bundle.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist'));
+}
 
 function bundle(){
+  b = watchify(b)
+  b.on('update', bundle)
+  b.on('log', gutil.log)
+
   return b.bundle()
     .on('error', gutil.log.bind(gutil, 'Browserify Error')  )
     .pipe(source('bundle.js'))
@@ -28,5 +39,12 @@ function bundle(){
     .pipe(gulp.dest('./dist'));
 }
 
+var fs = require('fs')
+function cleanup(){
+  fs.unlink('./dist/bundle.js')
+}
+
+gulp.task('cleanup', cleanup)
+gulp.task('production', productionBuild);
 gulp.task('js', bundle);
 gulp.task('default', ['js']);
