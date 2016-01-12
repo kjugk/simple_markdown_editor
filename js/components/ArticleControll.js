@@ -1,11 +1,8 @@
 import React, { PropTypes, Component } from 'react'
-import marked from 'marked'
-
-import Toolbar from 'material-ui/lib/toolbar/toolbar';
-import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
+import moment from 'moment'
 import RaisedButton from 'material-ui/lib/raised-button';
 
-class ArticleDisplay extends Component{
+class ArticleControll extends Component{
   constructor(props){
     super(props)
     this.handleDelete = this.handleDelete.bind(this)
@@ -25,24 +22,23 @@ class ArticleDisplay extends Component{
   render(){
     const { article } = this.props
     return(
-      <div>
-        <div style={{padding: "10px", borderBottom: "1px solid #EEE"}}>
+      <div style={{padding: "10px", boxSizing: "border-box", minHeight: "57px", borderBottom: "1px solid #EEE"}}>
+        <div style={{float: "left"}}>
           <RaisedButton label="edit" onTouchTap={this.handleEdit} />
           <RaisedButton style={{marginLeft: "10px"}} label="delete" onTouchTap={this.handleDelete} />
         </div>
-
-        <div style={{padding: "10px"}}
-             className="markdown-body"
-             dangerouslySetInnerHTML={{__html: marked(article.body)}} />
+        <div style={{overflow: "hidden", fontSize: "0.8em", textAlign: "right"}}>
+          更新日:{moment(article.updatedAt).format('YYYY/MM/DD HH:mm:ss')}
+        </div>
       </div>
     )
   }
 }
 
-ArticleDisplay.propTypes = {
+ArticleControll.propTypes = {
   article: PropTypes.object.isRequired,
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired
 }
 
-export default ArticleDisplay
+export default ArticleControll

@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import marked from 'marked'
 import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button';
+import ArticlePreview from './ArticlePreview'
 
 class ArticleEditor extends Component{
   constructor(props){
@@ -18,7 +19,6 @@ class ArticleEditor extends Component{
 
   handleChange(e){
     e.stopPropagation()
-    e.preventDefault()
     const body = this.refs.articleBody.getValue().trim()
     this.setState({body})
   }
@@ -27,7 +27,7 @@ class ArticleEditor extends Component{
     const { article } = this.props
     return(
       <div style={{padding: "5px"}}>
-        <div style={{height: "100%", width: "50%", float: "left",paddingRight: "5px", borderRight: "1px solid #EEE"}}>
+        <div style={{height: "100%", width: "50%", float: "left",paddingRight: "5px", boxSizing: "border-box", borderRight: "1px solid #EEE"}}>
           <TextField ref="articleBody"
                      fullWidth={true}
                      multiLine={true}
@@ -40,9 +40,7 @@ class ArticleEditor extends Component{
                         onTouchTap={this.handleSave} />
         </div>
 
-        <div className="markdown-body"
-             style={{paddingLeft: "10px", overflow: "hidden"}}
-             dangerouslySetInnerHTML={{__html: marked(this.state.body)}} />
+        <ArticlePreview articleBody={this.state.body} />
       </div>
     )
   }

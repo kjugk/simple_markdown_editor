@@ -20,10 +20,11 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({minWidth: 800, height: 600});
 
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow.setTitle('Simple Markdown Editor');
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

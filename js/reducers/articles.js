@@ -31,7 +31,7 @@ export default function articles(state = initialState, action) {
       return Object.assign({}, state, {
         isEditing: true,
         selectedId: action.article.id,
-        items: [action.article].concat(state.items)
+        items: [action.article, ...state.items]
       })
 
     case EDIT_ARTICLE:
@@ -48,15 +48,16 @@ export default function articles(state = initialState, action) {
           if(item.id !== action.articleId){
             return item
           } else {
-            return {...item, body: action.body }
+            return {...item, body: action.body, updatedAt: action.updatedAt }
           }
         })
       })
 
     case DELETE_ARTICLE:
+      const newItems = state.items.filter((item)=>{return item.id !== action.articleId})
       return Object.assign({}, state, {
-        selectedId: undefined,
-        items: state.items.filter((item)=>{return item.id !== action.articleId})
+        items: newItems,
+        selectedId: newItems.length >= 1 ? newItems[0].id : undefined
       })
 
     default:

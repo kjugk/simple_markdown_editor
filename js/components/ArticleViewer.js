@@ -1,12 +1,11 @@
 import React, { PropTypes, Component } from 'react'
-import marked from 'marked'
 
 import ArticleList from '../components/ArticleList'
-import ArticleDisplay from '../components/ArticleDisplay'
+import ArticlePreview from '../components/ArticlePreview'
+import ArticleControll from './ArticleControll'
 import RaisedButton from 'material-ui/lib/raised-button';
 
 class ArticleViewer extends Component{
-
   render(){
     const{ articles, selectedArticle, onSelect, onCreate, onEdit, onDelete } = this.props
 
@@ -25,9 +24,13 @@ class ArticleViewer extends Component{
 
         <div className="article-preview-area">
           { selectedArticle &&
-            <ArticleDisplay article={selectedArticle}
-                            onEdit={onEdit}
-                            onDelete={onDelete} />
+            <div>
+              <ArticleControll article={selectedArticle}
+                               onEdit={onEdit}
+                               onDelete={onDelete} />
+
+              <ArticlePreview articleBody={selectedArticle.body} />
+            </div>
           }
         </div>
       </div>

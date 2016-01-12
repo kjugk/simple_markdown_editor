@@ -5,17 +5,16 @@ var gutil = require('gulp-util');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var bebelify = require('babelify');
-var reactify = require('reactify');
 
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
 
 var b = watchify(browserify({
-  entries: ['./index.js'],
-  debug: true
+  entries: ['./js/index.js'],
+  transform: ['babelify'],
+  debug: true,
 }))
-.transform("babelify")
 .on('update', bundle)
 .on('log', gutil.log)
 
@@ -26,7 +25,7 @@ function bundle(){
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./dist'));
 }
 
 gulp.task('js', bundle);

@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import AppProgress from '../components/AppProgress'
 import ArticleViewer from '../components/ArticleViewer'
 import ArticleEditor from '../components/ArticleEditor'
-import { selectArticle, fetchArticles, createArticle, editArticle, saveArticle, deleteArticle } from '../actions/articles'
+import { selectArticle, fetchArticles, createArticle,
+         editArticle, saveArticle, deleteArticle } from '../actions/articles'
+
 
 class App extends Component {
   handleItemSelect(id){
@@ -44,12 +46,14 @@ class App extends Component {
         <AppProgress visible={articles.isFetching} />
 
         {!articles.isFetching && !articles.isEditing &&
-          <ArticleViewer articles={articles}
-                         selectedArticle={selectedArticle}
-                         onSelect={this.handleItemSelect.bind(this)}
-                         onCreate={this.handleCreate.bind(this)}
-                         onEdit={this.handleEdit.bind(this)}
-                         onDelete={this.handleDelete.bind(this)} />
+          <div>
+            <ArticleViewer articles={articles}
+                           selectedArticle={selectedArticle}
+                           onSelect={this.handleItemSelect.bind(this)}
+                           onCreate={this.handleCreate.bind(this)}
+                           onEdit={this.handleEdit.bind(this)}
+                           onDelete={this.handleDelete.bind(this)} />
+          </div>
         }
         {!articles.isFetching && articles.isEditing &&
           <ArticleEditor article={selectedArticle}
