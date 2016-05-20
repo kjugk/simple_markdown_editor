@@ -13,8 +13,14 @@ var uglify = require('gulp-uglify');
 
 var b = browserify({
   entries: ['./js/index.js'],
-  transform: ['babelify']
+  transform: ['babelify'],
+  cache: {},
+  packageCache: {},
+  plugin: [watchify]
+
 })
+b.on('update', bundle)
+b.on('log', gutil.log)
 
 function productionBuild(){
   return b.bundle()
@@ -26,10 +32,6 @@ function productionBuild(){
 }
 
 function bundle(){
-  b = watchify(b)
-  b.on('update', bundle)
-  b.on('log', gutil.log)
-
   return b.bundle()
     .on('error', gutil.log.bind(gutil, 'Browserify Error')  )
     .pipe(source('bundle.js'))

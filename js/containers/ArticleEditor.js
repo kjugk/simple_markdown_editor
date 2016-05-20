@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import marked from 'marked'
-import TextField from 'material-ui/lib/text-field'
-import RaisedButton from 'material-ui/lib/raised-button';
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 import ArticlePreview from '../components/ArticlePreview'
 import { getSelectedArticle } from '../reducers/articles.js'
 import { updateArticle, cancelEdit } from '../actions/articles'
@@ -18,7 +18,7 @@ class ArticleEditor extends Component{
 
   handleSave(){
     const { article, updateArticle, dispatch } = this.props
-    dispatch(updateArticle(article.id, this.state.body));
+    dispatch(updateArticle(article.id, this.state.body))
   }
 
   handleBack(){
@@ -48,10 +48,10 @@ class ArticleEditor extends Component{
 
           <RaisedButton primary={true}
                         label="save"
-                        onTouchTap={this.handleSave} />
+                        onClick={this.handleSave} />
 
           <RaisedButton label="back"
-                        onTouchTap={this.handleBack.bind(this)} />
+                        onClick={this.handleBack.bind(this)} />
         </div>
 
         <div style={{overflow: 'hidden'}}>

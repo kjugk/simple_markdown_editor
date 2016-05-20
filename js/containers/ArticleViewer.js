@@ -3,22 +3,23 @@ import { connect } from 'react-redux'
 import ArticleList from '../components/ArticleList'
 import ArticlePreview from '../components/ArticlePreview'
 import ArticleControll from '../components/ArticleControll'
-import { getSelectedArticle } from '../reducers/articles.js'
+
+import { getSelectedArticle } from '../reducers/articles'
 import { selectArticle, createArticle,
          editArticle, deleteArticle } from '../actions/articles'
 
-import FloatingActionButton from 'material-ui/lib/floating-action-button';
-import FontIcon from 'material-ui/lib/font-icon';
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import FontIcon from 'material-ui/FontIcon'
 
 class ArticleViewer extends Component{
-  handleEdit(id){
-    const { editArticle, dispatch } = this.props
-    dispatch(editArticle(id))
+  handleEdit(){
+    const {articles, editArticle, dispatch} = this.props
+    dispatch(editArticle(articles.selectedId))
   }
 
-  handleDelete(id){
-    const { deleteArticle, dispatch } = this.props
-    dispatch(deleteArticle(id))
+  handleDelete(){
+    const {articles, deleteArticle, dispatch} = this.props
+    dispatch(deleteArticle(articles.selectedId))
   }
 
   render(){
@@ -27,29 +28,40 @@ class ArticleViewer extends Component{
     return(
       <div>
         <div className="article-list-area">
-          <ArticleList articles={articles}
-                       onItemClick={(id)=>{
-                         dispatch(selectArticle(id))
-                       }}/>
+          <ArticleList
+            articles={articles}
+            onItemClick={(id)=>{
+              dispatch(selectArticle(id))
+            }}
+            />
         </div>
 
         <div className="article-preview-area">
           { selectedArticle &&
             <div>
-              <ArticleControll article={selectedArticle}
-                               onEdit={this.handleEdit.bind(this)}
-                               onDelete={this.handleDelete.bind(this)} />
+              <ArticleControll
+                article={selectedArticle}
+                onEditClick={this.handleEdit.bind(this)}
+                onDeleteClick={this.handleDelete.bind(this)}
+                />
 
               <ArticlePreview articleBody={selectedArticle.body || ""} />
             </div>
           }
         </div>
 
-        <FloatingActionButton style={{position: "fixed", right: "10px", bottom: "10px"}}
-                              onTouchTap={()=>{
-                                dispatch(createArticle())
-                              }}>
-          <FontIcon className="material-icons" color="#fff">create</FontIcon>
+        <FloatingActionButton
+          style={{position: "fixed", right: "10px", bottom: "10px"}}
+          onClick={()=>{
+            dispatch(createArticle())
+          }}
+          >
+          <FontIcon
+            className="material-icons"
+            color="#fff"
+            >
+            create
+          </FontIcon>
         </FloatingActionButton>
       </div>
     )
@@ -58,20 +70,21 @@ class ArticleViewer extends Component{
 
 ArticleViewer.propTypes = {
   articles: PropTypes.object.isRequired,
-  selectedArticle: PropTypes.object,
   selectArticle: PropTypes.func.isRequired,
   createArticle: PropTypes.func.isRequired,
   editArticle: PropTypes.func.isRequired,
-  deleteArticle: PropTypes.func.isRequired
+  deleteArticle: PropTypes.func.isRequired,
+  selectedArticle: PropTypes.object
 }
 
 function mapStateToProps(state){
   return{
-    selectedArticle: getSelectedArticle(state),
+    articles: state.articles,
     selectArticle,
     createArticle,
     editArticle,
-    deleteArticle
+    deleteArticle,
+    selectedArticle: getSelectedArticle(state),
   }
 }
 
