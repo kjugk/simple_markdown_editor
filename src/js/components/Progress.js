@@ -1,18 +1,23 @@
 import React, { PropTypes, Component } from 'react'
 import CircularProgress from 'material-ui/CircularProgress'
 
-const AppProgress = (props) => {
+const style = {
+  textAlign: "center",
+  paddingTop: "20px"
+}
+
+const Progress = (props) => {
   if(!props.visible){ return null }
 
   return (
-    <div style={{textAlign: "center", paddingTop: "20px"}}>
-      <CircularProgress mode="indeterminate" color="#ff4081" />
+    <div style={style}>
+      <CircularProgress mode="indeterminate" />
     </div>
   )
 }
 
-AppProgress.propTypes = {
+Progress.propTypes = {
   visible: PropTypes.bool.isRequired
 }
 
-export default AppProgress
+export default Progress

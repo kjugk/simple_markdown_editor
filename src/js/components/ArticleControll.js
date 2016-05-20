@@ -3,12 +3,18 @@ import moment from 'moment'
 import RaisedButton from 'material-ui/RaisedButton'
 import IconButton from 'material-ui/IconButton'
 
+const style = {
+  borderTop: "1px solid #EEE",
+  borderBottom: "1px solid #EEE",
+  position: "relative"
+}
+
 class ArticleControll extends Component{
   render(){
     const { article } = this.props
 
     return(
-      <div style={{borderBottom: "1px solid #EEE", position: "relative"}}>
+      <div style={style}>
         <IconButton iconClassName="material-icons"
                     tooltip="edit"
                     onClick={this.props.onEditClick}>mode_edit</IconButton>

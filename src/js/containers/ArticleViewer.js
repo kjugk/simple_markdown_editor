@@ -6,9 +6,8 @@ import ArticleControll from '../components/ArticleControll'
 
 import { getSelectedArticle } from '../reducers/articles'
 import { selectArticle, createArticle,
-         editArticle, deleteArticle } from '../actions/articles'
+         editArticle, deleteArticle } from '../actions/ArticleActions'
 
-import FloatingActionButton from 'material-ui/FloatingActionButton'
 import FontIcon from 'material-ui/FontIcon'
 
 class ArticleViewer extends Component{
@@ -26,8 +25,8 @@ class ArticleViewer extends Component{
     const{articles, selectedArticle, selectArticle, createArticle, dispatch} = this.props
 
     return(
-      <div>
-        <div className="article-list-area">
+      <div className="fluid-container fullHeight">
+        <div className="col-xs-4 col-lg-2 no-gutter article-list-box fullHeight">
           <ArticleList
             articles={articles}
             onItemClick={(id)=>{
@@ -36,7 +35,7 @@ class ArticleViewer extends Component{
             />
         </div>
 
-        <div className="article-preview-area">
+        <div className="col-xs-8 col-lg-10 no-gutter">
           { selectedArticle &&
             <div>
               <ArticleControll
@@ -49,20 +48,6 @@ class ArticleViewer extends Component{
             </div>
           }
         </div>
-
-        <FloatingActionButton
-          style={{position: "fixed", right: "10px", bottom: "10px"}}
-          onClick={()=>{
-            dispatch(createArticle())
-          }}
-          >
-          <FontIcon
-            className="material-icons"
-            color="#fff"
-            >
-            create
-          </FontIcon>
-        </FloatingActionButton>
       </div>
     )
   }

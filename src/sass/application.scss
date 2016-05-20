@@ -1,0 +1,45 @@
+@import "../css/bootstrap";
+@import "../css/highlight";
+@import "../css/github-markdown";
+
+html{
+  height: 100%;
+}
+
+body{
+  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  height: 100%;
+}
+
+.no-gutter{
+  margin: 0;
+  padding: 0;
+}
+
+.fullHeight{
+  height: 100%;
+}
+
+.fullWidth{
+  width: 100%;
+}
+
+.article-list-box{
+  border-right: 1px solid #EEE;
+}
+
+.article-list{
+  border-top: 1px solid #EEE;
+}
+
+.article-list-item{
+  word-break: break-all;
+}
+
+.article-list-item.selected{
+  background-color: #EEE!important;
+}
+
+.article-preview-area{
+  overflow: hidden;
+}

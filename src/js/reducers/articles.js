@@ -1,5 +1,5 @@
 import { FETCH_ARTICLES, RECEIVE_ARTICLES, SELECT_ARTICLE, CANCEL_EDIT,
-         CREATE_ARTICLE, EDIT_ARTICLE, UPDATE_ARTICLE, DELETE_ARTICLE } from '../actions/articles'
+         CREATE_ARTICLE, EDIT_ARTICLE, UPDATE_ARTICLE, DELETE_ARTICLE } from '../actions/ArticleActions'
 
 const initialState = {
   isFetching: false,

@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchArticles } from '../actions/articles'
+import { fetchArticles } from '../actions/ArticleActions'
 
 import ArticleViewer from './ArticleViewer'
 import ArticleEditor from './ArticleEditor'
-import AppProgress from '../components/AppProgress'
+import Progress from '../components/Progress'
 
 class App extends Component {
   componentDidMount(){
@@ -14,7 +14,7 @@ class App extends Component {
 
   render(){
     return(
-      <div className="app">
+      <div className="app fullHeight">
         <h1>Simple Markdown Editor</h1>
 
         {renderContent(this.props.articles)}
@@ -25,7 +25,7 @@ class App extends Component {
 
 const renderContent = (articles) => {
   if(articles.isFetching){
-    return <AppProgress visible={articles.isFetching} />
+    return <Progress visible={articles.isFetching} />
 
   } else if(articles.isEditing){
     return <ArticleEditor />

@@ -17,14 +17,14 @@ const renderListItems = (props) => {
         <ListItem
           className={getClassName(item, props.articles.selectedId)}
           onClick={()=>{props.onItemClick(item.id)}}
-          primaryText={getTitle(item.body)} />
+          primaryText={renderTitle(item.body)} />
         <Divider />
       </div>
     )
   })
 }
 
-const getTitle = (body) => {
+const renderTitle = (body) => {
   let title = body.split(/\n/)[0]
   return title ? title : "未設定"
 }

@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import ArticlePreview from '../components/ArticlePreview'
 import { getSelectedArticle } from '../reducers/articles.js'
-import { updateArticle, cancelEdit } from '../actions/articles'
+import { updateArticle, cancelEdit } from '../actions/ArticleActions'
 
 class ArticleEditor extends Component{
   constructor(props){
