@@ -9,6 +9,11 @@ export function setArticle(article){
   store.set('articles', [article, ...articles])
 }
 
+export function getArticle(articleId){
+  let articles = getArticles()
+  return articles.filter((a)=>{return a.id == articleId})[0]
+}
+
 export function updateArticle(articleId, body){
   let articles = getArticles()
   articles = articles.map((a)=>{

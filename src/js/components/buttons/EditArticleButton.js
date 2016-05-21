@@ -5,17 +5,25 @@ import SvgIcon from 'material-ui/SvgIcon';
 import Edit from 'material-ui/svg-icons/image/edit'
 
 const EditArticleButton = (props) => {
+  let color = props.disabled ? "grey" : "#000000"
+
   return (
-    <IconButton tooltip="edit" iconStyle={{width: 24, height: 24}} style={{width: 24, height: 24, padding: "8px 0"}} onClick={props.onClick}>
+    <IconButton
+      disabled={props.disabled}
+      iconStyle={{width: 24, height: 24}}
+      style={{width: 24, height: 24, padding: "8px 0"}}
+      onClick={props.onClick}
+      >
       <SvgIcon>
-        <Edit />
+        <Edit color={color} />
       </SvgIcon>
     </IconButton>
   )
 }
 
 EditArticleButton.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired
 }
 
 export default EditArticleButton

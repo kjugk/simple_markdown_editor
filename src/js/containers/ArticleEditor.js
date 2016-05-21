@@ -1,78 +1,89 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import marked from 'marked'
+import { hashHistory } from 'react-router'
+import { initForm, changeBody, submit, clearForm } from '../actions/ArticleFormActions'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import ArticlePreview from '../components/ArticlePreview'
-import { getSelectedArticle } from '../reducers/articles.js'
-import { updateArticle, cancelEdit } from '../actions/ArticleActions'
 
 class ArticleEditor extends Component{
   constructor(props){
     super(props)
-    this.state = { body: props.article.body }
-
     this.handleSave = this.handleSave.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleSave(){
-    const { article, updateArticle, dispatch } = this.props
-    dispatch(updateArticle(article.id, this.state.body))
+  componentDidMount(){
+    if(!!this.props.params.articleId){
+      this.props.dispatch(this.props.initForm(this.props.params.articleId))
+    }
   }
 
-  handleBack(){
-    const { cancelEdit, dispatch } = this.props
-    dispatch(cancelEdit());
+  componentDidUpdate(){
+    if(this.props.articleForm.isSubmitComplete){
+      hashHistory.push('/')
+    }
   }
 
-  handleChange(e){
-    e.stopPropagation()
-    const body = this.refs.articleBody.getValue()
-
-    this.setState({body})
+  componentWillUnmount(){
+    this.props.dispatch(this.props.clearForm())
   }
 
   render(){
-    const { article, dispatch } = this.props
+    const { articleForm, dispatch } = this.props
 
     return(
-      <div style={{padding: "5px"}}>
-        <div style={{height: "100%", width: "50%", float: "left",paddingRight: "5px", boxSizing: "border-box", borderRight: "1px solid #EEE"}}>
-          <TextField ref="articleBody"
-                     fullWidth={true}
-                     multiLine={true}
-                     hintText="1行目はタイトル"
-                     onChange={this.handleChange}
-                     defaultValue={this.state.body} />
+      <div className="fullHeight" style={{borderTop: "1px solid #EEE"}}>
+        <div className="fullHeight col-xs-6 no-gutter" style={{padding: "0 8px", borderRight: "1px solid #EEE"}}>
+          <TextField
+            fullWidth={true}
+            multiLine={true}
+            hintText="1行目はタイトルです"
+            onChange={this.handleChange}
+            value={articleForm.body}
+            />
 
-          <RaisedButton primary={true}
-                        label="save"
-                        onClick={this.handleSave} />
-
-          <RaisedButton label="back"
-                        onClick={this.handleBack.bind(this)} />
+          <RaisedButton
+            primary={true}
+            label="save"
+            disabled={articleForm.body === ""}
+            onClick={this.handleSave}
+            />
         </div>
 
-        <div style={{overflow: 'hidden'}}>
-          <ArticlePreview articleBody={this.state.body} />
+        <div className="col-xs-6 no-gutter">
+          <ArticlePreview articleBody={articleForm.body} />
         </div>
       </div>
     )
   }
+
+  handleSave(e){
+    e.stopPropagation()
+    this.props.dispatch(this.props.submit(this.props.articleForm.id, this.props.articleForm.body))
+  }
+
+  handleChange(e){
+    e.stopPropagation()
+    this.props.dispatch(this.props.changeBody(e.target.value))
+  }
 }
 
 ArticleEditor.propTypes = {
-  article: PropTypes.object.isRequired,
-  updateArticle: PropTypes.func.isRequired,
-  cancelEdit: PropTypes.func.isRequired
+  articleForm: PropTypes.object.isRequired,
+  initForm: PropTypes.func.isRequired,
+  changeBody: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired,
+  clearForm: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state){
   return{
-    article: getSelectedArticle(state),
-    updateArticle,
-    cancelEdit
+    articleForm: state.articleForm,
+    initForm,
+    changeBody,
+    submit,
+    clearForm
   }
 }
 

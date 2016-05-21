@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import ArticleList from '../components/ArticleList'
 import ArticlePreview from '../components/ArticlePreview'
-import ArticleControll from '../components/ArticleControll'
 import VerticalMenu from './VerticalMenu'
 
 import { getSelectedArticle } from '../reducers/articles'
@@ -12,7 +11,7 @@ import { selectArticle, createArticle,
 
 class ArticleViewer extends Component{
   render(){
-    const{articles, selectedArticle, selectArticle, createArticle, dispatch} = this.props
+    const{articles, selectedArticle, selectArticle, dispatch} = this.props
 
     return(
       <div className="fluid-container fullHeight" style={{borderTop: "1px solid #EEE"}}>
@@ -27,7 +26,7 @@ class ArticleViewer extends Component{
         </div>
 
         <div className="col-xs-8 col-lg-10 no-gutter">
-          { selectedArticle &&
+          { !!articles.selectedId &&
             <div>
               <ArticlePreview articleBody={selectedArticle.body || ""} />
             </div>

@@ -4,7 +4,7 @@ import marked from 'marked'
 const ArticlePreview = (props) => {
   return (
     <div
-      style={{padding: "10px"}}
+      style={{padding: "10px 8px"}}
       className="markdown-body"
       dangerouslySetInnerHTML={{__html: marked(props.articleBody)}}
       />

@@ -4,7 +4,7 @@ import Divider from 'material-ui/Divider'
 
 const ArticleList = (props) => {
   return(
-    <List style={{paddingTop: "0"}}>
+    <List style={{paddingTop: "0px"}}>
       {renderListItems(props)}
     </List>
   )

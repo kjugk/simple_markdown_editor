@@ -1,14 +1,20 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { hashHistory } from 'react-router'
 import {createArticle, editArticle, deleteArticle} from '../actions/ArticleActions'
+
 import CreateArticleButton from '../components/buttons/CreateArticleButton'
 import IconButton from 'material-ui/IconButton';
 import EditArticleButton from '../components/buttons/EditArticleButton'
 import DeleteArticleButton from '../components/buttons/DeleteArticleButton'
 
 class VerticalMenu extends Component {
+  handleCreateClick(){
+    hashHistory.push('articles/new')
+  }
+
   handleEditClick(){
-    this.props.dispatch(this.props.editArticle(this.props.articles.selectedId))
+    hashHistory.push(`articles/${this.props.articles.selectedId}/edit`)
   }
 
   handleDeleteClick(){
@@ -16,6 +22,7 @@ class VerticalMenu extends Component {
   }
 
   render(){
+    const{articles} = this.props
     return(
       <div
         style={{
@@ -29,13 +36,19 @@ class VerticalMenu extends Component {
         >
 
         <div>
-          <CreateArticleButton onClick={this.props.createArticle} />
+          <CreateArticleButton onClick={this.handleCreateClick.bind(this)} />
         </div>
         <div>
-          <EditArticleButton onClick={this.handleEditClick.bind(this)} />
+          <EditArticleButton
+            disabled={articles.selectedId === null}
+            onClick={this.handleEditClick.bind(this)}
+            />
         </div>
         <div>
-          <DeleteArticleButton onClick={this.handleDeleteClick.bind(this)} />
+          <DeleteArticleButton
+            disabled={articles.selectedId === null}
+            onClick={this.handleDeleteClick.bind(this)}
+            />
         </div>
       </div>
     )

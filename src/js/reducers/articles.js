@@ -1,10 +1,11 @@
-import { FETCH_ARTICLES, RECEIVE_ARTICLES, SELECT_ARTICLE, CANCEL_EDIT,
-         CREATE_ARTICLE, EDIT_ARTICLE, UPDATE_ARTICLE, DELETE_ARTICLE } from '../actions/ArticleActions'
+import { FETCH_ARTICLES, RECEIVE_ARTICLES, SELECT_ARTICLE,
+         DELETE_ARTICLE } from '../actions/ArticleActions'
+
+import {SUBMIT_COMPLETE} from '../actions/ArticleFormActions'
 
 const initialState = {
   isFetching: false,
-  isEditing: false,
-  selectedId: undefined,
+  selectedId: null,
   items: []
 }
 
@@ -18,7 +19,7 @@ export default function articles(state = initialState, action) {
     case RECEIVE_ARTICLES:
       return Object.assign({}, state, {
         isFetching: false,
-        selectedId: action.articles.length >= 1 ? action.articles[0].id : undefined,
+        selectedId: action.articles.length >= 1 ? action.articles[0].id : null,
         items: action.articles
       })
 
@@ -27,42 +28,17 @@ export default function articles(state = initialState, action) {
         selectedId: action.articleId
       })
 
-    case CREATE_ARTICLE:
+    case SUBMIT_COMPLETE:
       return Object.assign({}, state, {
-        isEditing: true,
-        selectedId: action.article.id,
-        items: [action.article, ...state.items]
-      })
-
-    case EDIT_ARTICLE:
-      return Object.assign({}, state, {
-        isEditing: true,
         selectedId: action.articleId,
-      })
-
-    case UPDATE_ARTICLE:
-      return Object.assign({}, state, {
-        isEditing: false,
-        selectedId: action.articleId,
-        items: state.items.map((item)=>{
-          if(item.id !== action.articleId){
-            return item
-          } else {
-            return { ...item, body: action.body, updatedAt: action.updatedAt }
-          }
-        })
+        items: action.articles
       })
 
     case DELETE_ARTICLE:
       const newItems = state.items.filter((item)=>{return item.id !== action.articleId})
       return Object.assign({}, state, {
         items: newItems,
-        selectedId: newItems.length >= 1 ? newItems[0].id : undefined
-      })
-
-    case CANCEL_EDIT:
-      return Object.assign({}, state, {
-        isEditing: false
+        selectedId: newItems.length >= 1 ? newItems[0].id : null
       })
 
     default:
@@ -72,7 +48,7 @@ export default function articles(state = initialState, action) {
 
 export function getSelectedArticle(state){
   const selectedId = state.articles.selectedId
-  if(selectedId == undefined) {return null}
+  if(selectedId == undefined) {return {}}
 
   return state.articles.items.filter((a)=>{return a.id === selectedId})[0]
 }
