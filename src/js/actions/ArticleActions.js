@@ -1,5 +1,5 @@
 import shortid from 'shortid'
-import * as Storage from '../utils/storage'
+import * as Storage from '../lib/storage'
 
 export const FETCH_ARTICLES = 'FETCH_ARTICLES'
 export const RECEIVE_ARTICLES = 'RECEIVE_ARTICLES'

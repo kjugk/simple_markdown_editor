@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers/index'
 import thunk from 'redux-thunk'
 
-import {configMarked} from './utils/markdown'
+import {configMarked} from './lib/markdown'
 import App from './containers/App'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import getMuiTheme from 'material-ui/styles/getMuiTheme';

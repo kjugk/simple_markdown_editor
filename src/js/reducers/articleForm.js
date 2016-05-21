@@ -1,4 +1,6 @@
-import { INIT_FORM_COMPLETE, CHANGE_BODY, SUBMIT_COMPLETE, CLEAR_FORM } from '../actions/ArticleFormActions'
+import {
+  INIT_FORM_COMPLETE, CHANGE_BODY, SUBMIT_COMPLETE, CLEAR_FORM
+} from '../actions/ArticleFormActions'
 
 const initialState = {
   id: null,

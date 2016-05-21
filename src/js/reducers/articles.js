@@ -1,5 +1,6 @@
-import { FETCH_ARTICLES, RECEIVE_ARTICLES, SELECT_ARTICLE,
-         DELETE_ARTICLE } from '../actions/ArticleActions'
+import {
+  FETCH_ARTICLES, RECEIVE_ARTICLES, SELECT_ARTICLE, DELETE_ARTICLE}
+from '../actions/ArticleActions'
 
 import {SUBMIT_COMPLETE} from '../actions/ArticleFormActions'
 
@@ -48,7 +49,7 @@ export default function articles(state = initialState, action) {
 
 export function getSelectedArticle(state){
   const selectedId = state.articles.selectedId
-  if(selectedId == undefined) {return {}}
+  if(selectedId === null) {return {}}
 
   return state.articles.items.filter((a)=>{return a.id === selectedId})[0]
 }

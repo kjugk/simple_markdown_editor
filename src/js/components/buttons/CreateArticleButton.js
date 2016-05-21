@@ -6,16 +6,27 @@ import AddCircle from 'material-ui/svg-icons/content/add-circle'
 
 const CreateArticleButton = (props) => {
   return (
-    <IconButton iconStyle={{width: 48, height: 48}} style={{width: 48, height: 48, padding: "8px 0"}} onClick={props.onClick}>
+    <IconButton
+      iconStyle={props.iconStyle}
+      style={props.style}
+      onClick={props.onClick}
+      >
       <SvgIcon>
-        <AddCircle color="#FFFFFF" />
+        <AddCircle color="rgb(0, 188, 212)"/>
       </SvgIcon>
     </IconButton>
   )
 }
 
 CreateArticleButton.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  style: PropTypes.object,
+  iconStyle: PropTypes.object
+}
+
+CreateArticleButton.defaultProps = {
+  style: {},
+  iconStyle: {}
 }
 
 export default CreateArticleButton

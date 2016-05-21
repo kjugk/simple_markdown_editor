@@ -1,5 +1,5 @@
 import shortid from 'shortid'
-import * as Storage from '../utils/storage'
+import * as Storage from '../lib/storage'
 
 export const INIT_FORM_COMPLETE = 'INIT_FORM_COMPLETE'
 export const CHANGE_BODY = 'CHANGE_BODY'
@@ -21,17 +21,15 @@ export function changeBody(body) {
 }
 
 export function submit(articleId, body) {
-  let article = {}
+  let id = articleId === null ? shortid.generate() : articleId
+  let article = {id, body}
 
-  if(!!articleId){
-    Storage.updateArticle(articleId, body)
-
-  } else {
-    article = {id: shortid.generate(), body}
+  if(articleId === null){
     Storage.setArticle(article)
+  } else {
+    Storage.updateArticle(id, body)
   }
 
   let articles = Storage.getArticles()
-
   return {type: SUBMIT_COMPLETE, articleId: article.id, articles}
 }

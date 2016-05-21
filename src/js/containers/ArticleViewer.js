@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ArticleList from '../components/ArticleList'
 import ArticlePreview from '../components/ArticlePreview'
 import VerticalMenu from './VerticalMenu'
+import HorizontalMenu from './HorizontalMenu'
 
 import { getSelectedArticle } from '../reducers/articles'
 import { selectArticle, createArticle,
@@ -14,9 +15,11 @@ class ArticleViewer extends Component{
     const{articles, selectedArticle, selectArticle, dispatch} = this.props
 
     return(
-      <div className="fluid-container fullHeight" style={{borderTop: "1px solid #EEE"}}>
-        <div className="col-xs-4 col-lg-2 no-gutter article-list-box fullHeight">
+      <div className="fluid-container fullHeight">
+        <HorizontalMenu />
+        <div className="col-xs-6 col-lg-4 no-gutter article-list-box fullHeight">
           <VerticalMenu />
+
           <ArticleList
             articles={articles}
             onItemClick={(id)=>{
@@ -25,7 +28,7 @@ class ArticleViewer extends Component{
             />
         </div>
 
-        <div className="col-xs-8 col-lg-10 no-gutter">
+        <div className="col-xs-6 col-lg-8 no-gutter">
           { !!articles.selectedId &&
             <div>
               <ArticlePreview articleBody={selectedArticle.body || ""} />

@@ -2,13 +2,16 @@
 @import "../css/highlight";
 @import "../css/github-markdown";
 
-html{
+html,body{
   height: 100%;
 }
 
 body{
   font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  height: 100%;
+}
+
+h1, h2{
+  margin: 0;
 }
 
 .no-gutter{
@@ -24,6 +27,33 @@ body{
   width: 100%;
 }
 
+.flex-container{
+  display: -webkit-flex;
+  display: flex;
+}
+
+.flex-align-center{
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.flex-wrap{
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 767px) {
+  .vertical-menu{
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .horizontal-menu{
+    display: none;
+  }
+}
+
 .article-list-box{
   border-right: 1px solid #EEE;
 }
@@ -33,9 +63,5 @@ body{
 }
 
 .article-list-item.selected{
-  background-color: #EEE!important;
-}
-
-.article-preview-area{
-  overflow: hidden;
+  background-color: #eeeeee!important;
 }

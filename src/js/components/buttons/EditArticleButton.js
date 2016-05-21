@@ -10,8 +10,8 @@ const EditArticleButton = (props) => {
   return (
     <IconButton
       disabled={props.disabled}
-      iconStyle={{width: 24, height: 24}}
-      style={{width: 24, height: 24, padding: "8px 0"}}
+      iconStyle={props.iconStyle}
+      style={props.style}
       onClick={props.onClick}
       >
       <SvgIcon>
@@ -23,7 +23,14 @@ const EditArticleButton = (props) => {
 
 EditArticleButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired
+  disabled: PropTypes.bool.isRequired,
+  style: PropTypes.object,
+  iconStyle: PropTypes.object
+}
+
+EditArticleButton.defaultProps = {
+  style: {},
+  iconStyle: {}
 }
 
 export default EditArticleButton

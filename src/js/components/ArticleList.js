@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import {List, ListItem} from 'material-ui/List'
 import Divider from 'material-ui/Divider'
+import moment from 'moment'
 
 const ArticleList = (props) => {
   return(
@@ -17,7 +18,9 @@ const renderListItems = (props) => {
         <ListItem
           className={getClassName(item, props.articles.selectedId)}
           onClick={()=>{props.onItemClick(item.id)}}
-          primaryText={renderTitle(item.body)} />
+          primaryText={renderTitle(item.body)}
+          secondaryText={<span style={{fontSize: "12px"}}>{moment(item.updatedAt).format('YYYY/MM/DD HH:mm')}</span>}
+          />
         <Divider />
       </div>
     )

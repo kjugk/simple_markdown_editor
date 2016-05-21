@@ -9,7 +9,7 @@ import EditArticleButton from '../components/buttons/EditArticleButton'
 import DeleteArticleButton from '../components/buttons/DeleteArticleButton'
 import styles from '../components/styles'
 
-class VerticalMenu extends Component {
+class HorizontalMenu extends Component {
   handleCreateClick(){
     hashHistory.push('articles/new')
   }
@@ -26,28 +26,21 @@ class VerticalMenu extends Component {
     const{articles} = this.props
     return(
       <div
-        style={{
-          float: "left",
-          textAlign: "center",
-          borderRight: "1px solid #eeeeee"
-        }}
-        className="vertical-menu fullHeight"
+        className="horizontal-menu flex-container flex-align-center"
+        style={{borderBottom: "1px solid #EEE"}}
         >
 
         <div>
           <CreateArticleButton
             onClick={this.handleCreateClick.bind(this)}
-            style={styles.small}
-            iconStyle={styles.smallIcon}
             />
         </div>
-        <div>
+
+        <div style={{marginLeft: "auto"}}>
           <EditArticleButton
             disabled={articles.selectedId === null}
             onClick={this.handleEditClick.bind(this)}
             />
-        </div>
-        <div>
           <DeleteArticleButton
             disabled={articles.selectedId === null}
             onClick={this.handleDeleteClick.bind(this)}
@@ -58,7 +51,7 @@ class VerticalMenu extends Component {
   }
 }
 
-VerticalMenu.propTypes = {
+HorizontalMenu.propTypes = {
   createArticle: PropTypes.func.isRequired
 }
 
@@ -71,4 +64,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps)(VerticalMenu)
+export default connect(mapStateToProps)(HorizontalMenu)
