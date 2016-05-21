@@ -1,19 +1,16 @@
 import React, { PropTypes, Component } from 'react'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
+import IconButton from 'material-ui/IconButton';
+import SvgIcon from 'material-ui/SvgIcon';
+import AddCircle from 'material-ui/svg-icons/content/add-circle'
 
 const CreateArticleButton = (props) => {
   return (
-    <FloatingActionButton
-      style={{position: "fixed", right: "10px", bottom: "10px"}}
-      onClick={props.onClick}
-      >
-      <FontIcon
-        className="material-icons"
-        color="#fff"
-        >
-        create
-      </FontIcon>
-    </FloatingActionButton>
+    <IconButton iconStyle={{width: 48, height: 48}} style={{width: 48, height: 48, padding: "8px 0"}} onClick={props.onClick}>
+      <SvgIcon>
+        <AddCircle color="#FFFFFF" />
+      </SvgIcon>
+    </IconButton>
   )
 }
 

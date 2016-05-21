@@ -13,7 +13,7 @@ const ArticleList = (props) => {
 const renderListItems = (props) => {
   return props.articles.items.map(item => {
     return (
-      <div key={item.id}>
+      <div style={{overflow: "hidden"}} key={item.id}>
         <ListItem
           className={getClassName(item, props.articles.selectedId)}
           onClick={()=>{props.onItemClick(item.id)}}
