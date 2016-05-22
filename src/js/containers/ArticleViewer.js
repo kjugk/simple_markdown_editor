@@ -1,13 +1,12 @@
-import React, { PropTypes, Component } from 'react'
-import { connect } from 'react-redux'
+import React, {PropTypes, Component} from 'react'
+import {connect} from 'react-redux'
 import ArticleList from '../components/ArticleList'
 import ArticlePreview from '../components/ArticlePreview'
 import VerticalMenu from './VerticalMenu'
 import HorizontalMenu from './HorizontalMenu'
 
-import { getSelectedArticle } from '../reducers/articles'
-import { selectArticle, createArticle,
-         editArticle, deleteArticle } from '../actions/ArticleActions'
+import {getSelectedArticle} from '../reducers/articles'
+import {selectArticle} from '../actions/ArticleActions'
 
 
 class ArticleViewer extends Component{

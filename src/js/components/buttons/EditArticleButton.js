@@ -1,7 +1,6 @@
-import React, { PropTypes, Component } from 'react'
-import FloatingActionButton from 'material-ui/FloatingActionButton'
-import IconButton from 'material-ui/IconButton';
-import SvgIcon from 'material-ui/SvgIcon';
+import React, {PropTypes, Component} from 'react'
+import IconButton from 'material-ui/IconButton'
+import SvgIcon from 'material-ui/SvgIcon'
 import Edit from 'material-ui/svg-icons/image/edit'
 
 const EditArticleButton = (props) => {

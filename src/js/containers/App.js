@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { fetchArticles } from '../actions/ArticleActions'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {fetchArticles} from '../actions/ArticleActions'
 import Progress from '../components/Progress'
 
 class App extends Component {
@@ -38,4 +38,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App)

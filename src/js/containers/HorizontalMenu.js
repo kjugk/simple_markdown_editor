@@ -1,10 +1,8 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { hashHistory } from 'react-router'
-import {createArticle, editArticle, deleteArticle} from '../actions/ArticleActions'
-
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {hashHistory} from 'react-router'
+import {deleteArticle} from '../actions/ArticleActions'
 import CreateArticleButton from '../components/buttons/CreateArticleButton'
-import IconButton from 'material-ui/IconButton';
 import EditArticleButton from '../components/buttons/EditArticleButton'
 import DeleteArticleButton from '../components/buttons/DeleteArticleButton'
 import styles from '../components/styles'
@@ -52,14 +50,13 @@ class HorizontalMenu extends Component {
 }
 
 HorizontalMenu.propTypes = {
-  createArticle: PropTypes.func.isRequired
+  articles: PropTypes.object.isRequired,
+  deleteArticle: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state){
   return{
     articles: state.articles,
-    createArticle,
-    editArticle,
     deleteArticle
   }
 }

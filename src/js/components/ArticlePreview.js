@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react'
+import React, {PropTypes, Component} from 'react'
 import marked from 'marked'
 
 const ArticlePreview = (props) => {

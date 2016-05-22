@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react'
+import React, {PropTypes, Component} from 'react'
 import {List, ListItem} from 'material-ui/List'
 import Divider from 'material-ui/Divider'
 import moment from 'moment'

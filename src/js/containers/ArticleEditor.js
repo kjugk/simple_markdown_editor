@@ -1,7 +1,7 @@
-import React, { PropTypes, Component } from 'react'
-import { connect } from 'react-redux'
-import { hashHistory } from 'react-router'
-import { initForm, changeBody, submit, clearForm } from '../actions/ArticleFormActions'
+import React, {PropTypes, Component} from 'react'
+import {connect} from 'react-redux'
+import {hashHistory} from 'react-router'
+import {initForm, changeBody, submit, clearForm} from '../actions/ArticleFormActions'
 import ArticleForm from '../components/ArticleForm'
 import ArticlePreview from '../components/ArticlePreview'
 

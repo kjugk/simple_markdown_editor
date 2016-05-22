@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react'
+import React, {PropTypes, Component} from 'react'
 import CircularProgress from 'material-ui/CircularProgress'
 
 const style = {
