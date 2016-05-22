@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "simple markdown editor",
   "dependencies": {
+    "envify": "^3.4.0",
     "github-markdown-css": "^2.1.1",
     "highlight.js": "^9.0.0",
     "marked": "^0.3.5",

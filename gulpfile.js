@@ -7,6 +7,7 @@ var concat = require('gulp-concat');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var bebelify = require('babelify');
+var envify = require('envify');
 
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
@@ -16,7 +17,7 @@ var uglify = require('gulp-uglify');
 function bundleJsProduction(){
   var b = browserify({
     entries: ['./src/js/index.js'],
-    transform: ['babelify'],
+    transform: ['envify', 'babelify'],
   })
   return b.bundle()
     .on('error', gutil.log.bind(gutil, 'Browserify Error')  )
