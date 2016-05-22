@@ -13,18 +13,31 @@ var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 
-var b = browserify({
-  entries: ['./src/js/index.js'],
-  transform: ['babelify'],
-  cache: {},
-  packageCache: {},
-  plugin: [watchify]
+function bundleJsProduction(){
+  var b = browserify({
+    entries: ['./src/js/index.js'],
+    transform: ['babelify'],
+  })
+  return b.bundle()
+    .on('error', gutil.log.bind(gutil, 'Browserify Error')  )
+    .pipe(source('bundle.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist'));
+}
 
-})
-b.on('update', bundle)
-b.on('log', gutil.log)
+function bundleJs(){
+  var b = browserify({
+    entries: ['./src/js/index.js'],
+    transform: ['babelify'],
+    cache: {},
+    packageCache: {},
+    plugin: [watchify]
 
-function bundle(){
+  })
+  b.on('update', bundleJs)
+  b.on('log', gutil.log)
+
   return b.bundle()
     .on('error', gutil.log.bind(gutil, 'Browserify Error')  )
     .pipe(source('bundle.js'))
@@ -44,9 +57,13 @@ function scss(){
 var fs = require('fs')
 function cleanup(){
   fs.unlink('./dist/bundle.js')
+  fs.unlink('./dist/bundle.js.map')
+  fs.unlink('./dist/application.css')
 }
 
 gulp.task('cleanup', cleanup)
 gulp.task('sass', scss);
-gulp.task('js', bundle);
-gulp.task('default', ['js']);
+gulp.task('js:production', bundleJsProduction);
+gulp.task('js', bundleJs);
+gulp.task('production', ['sass', 'js:production']);
+gulp.task('default', ['sass', 'js']);

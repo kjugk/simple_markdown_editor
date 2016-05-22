@@ -12,8 +12,11 @@ class App extends Component {
   render(){
     return(
       <div className="fullHeight">
-        <header style={{borderBottom: "1px solid #eeeeee", padding: "20px 6px"}}>
+        <header style={{borderBottom: "1px solid #eeeeee", padding: "20px 6px 10px 6px"}}>
           <h2>Simple Markdown Editor</h2>
+          <div style={{textAlign: "right"}}>
+            <a href="https://github.com/kjugk/simple_markdown_editor">source</a>
+          </div>
         </header>
 
         {this.props.articles.isFetching && <Progress />}
