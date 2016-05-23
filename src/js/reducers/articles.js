@@ -46,10 +46,3 @@ export default function articles(state = initialState, action) {
       return state
   }
 }
-
-export function getSelectedArticle(state){
-  const selectedId = state.articles.selectedId
-  if(selectedId === null) {return {}}
-
-  return state.articles.items.filter((a)=>{return a.id === selectedId})[0]
-}

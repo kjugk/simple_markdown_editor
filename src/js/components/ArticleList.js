@@ -12,11 +12,11 @@ const ArticleList = (props) => {
 }
 
 const renderListItems = (props) => {
-  return props.articles.items.map(item => {
+  return props.items.map(item => {
     return (
       <div style={{overflow: "hidden"}} key={item.id}>
         <ListItem
-          className={getClassName(item, props.articles.selectedId)}
+          className={getClassName(item, props.selectedId)}
           onClick={()=>{props.onItemClick(item.id)}}
           primaryText={renderTitle(item.body)}
           secondaryText={<span style={{fontSize: "12px"}}>{moment(item.updatedAt).format('YYYY/MM/DD HH:mm')}</span>}
@@ -41,7 +41,8 @@ const getClassName = (item, selectedId) => {
 }
 
 ArticleList.propTypes = {
-  articles: PropTypes.object.isRequired,
+  selectedId: PropTypes.string,
+  items: PropTypes.array.isRequired,
   onItemClick: PropTypes.func.isRequired
 }
 

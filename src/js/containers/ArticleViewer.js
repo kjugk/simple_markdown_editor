@@ -5,25 +5,24 @@ import ArticlePreview from '../components/ArticlePreview'
 import VerticalMenu from './VerticalMenu'
 import HorizontalMenu from './HorizontalMenu'
 
-import {getSelectedArticle} from '../reducers/articles'
 import {selectArticle} from '../actions/ArticleActions'
-
+import {getSelectedArticle, getSordedArticles} from '../selectors'
 
 class ArticleViewer extends Component{
   render(){
-    const{articles, selectedArticle, selectArticle, dispatch} = this.props
+    const{articles, items, selectedArticle, selectArticle, dispatch} = this.props
 
     return(
       <div className="fluid-container fullHeight">
         <HorizontalMenu />
+
         <div className="col-xs-6 col-lg-4 no-gutter article-list-box fullHeight">
           <VerticalMenu />
 
           <ArticleList
-            articles={articles}
-            onItemClick={(id)=>{
-              dispatch(selectArticle(id))
-            }}
+            selectedId={articles.selectedId}
+            items={items}
+            onItemClick={(id)=>{dispatch(selectArticle(id))}}
             />
         </div>
 
@@ -41,15 +40,17 @@ class ArticleViewer extends Component{
 
 ArticleViewer.propTypes = {
   articles: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
+  selectedArticle: PropTypes.object,
   selectArticle: PropTypes.func.isRequired,
-  selectedArticle: PropTypes.object
 }
 
 function mapStateToProps(state){
   return{
     articles: state.articles,
-    selectArticle,
+    items: getSordedArticles(state),
     selectedArticle: getSelectedArticle(state),
+    selectArticle,
   }
 }
 

@@ -27,18 +27,19 @@ function bundleJsProduction(){
     .pipe(gulp.dest('./dist'));
 }
 
+//TODO .onを関数内で定義しない
+var b = browserify({
+  entries: ['./src/js/index.js'],
+  transform: ['babelify'],
+  cache: {},
+  packageCache: {},
+  plugin: [watchify]
+
+})
+b.on('update', bundleJs)
+b.on('log', gutil.log)
+
 function bundleJs(){
-  var b = browserify({
-    entries: ['./src/js/index.js'],
-    transform: ['babelify'],
-    cache: {},
-    packageCache: {},
-    plugin: [watchify]
-
-  })
-  b.on('update', bundleJs)
-  b.on('log', gutil.log)
-
   return b.bundle()
     .on('error', gutil.log.bind(gutil, 'Browserify Error')  )
     .pipe(source('bundle.js'))
