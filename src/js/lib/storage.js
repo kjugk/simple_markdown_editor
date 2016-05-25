@@ -15,11 +15,13 @@ export function getArticle(articleId){
   return articles.filter((a)=>{return a.id === articleId})[0]
 }
 
-export function updateArticle(articleId, body){
+export function updateArticle(articleId, body, tags){
   let articles = getArticles()
+
   articles = articles.map((a)=>{
     if(a.id === articleId){
       a.body = body
+      a.tags = tags
       a.updatedAt = new Date()
     }
     return a

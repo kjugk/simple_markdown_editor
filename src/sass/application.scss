@@ -2,7 +2,7 @@
 @import "../css/highlight";
 @import "../css/github-markdown";
 
-html,body{
+html, body{
   height: 100%;
 }
 
@@ -10,8 +10,9 @@ body{
   font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-h1, h2{
+h1, h2, h4{
   margin: 0;
+  padding: 0;
 }
 
 .no-gutter{
@@ -40,6 +41,17 @@ h1, h2{
 .flex-wrap{
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
+}
+
+.label{
+  display: inline-block;
+  padding: 2px 6px 3px;
+  border-radius: 2px;
+}
+
+.label-info{
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.870588);
 }
 
 @media screen and (max-width: 767px) {

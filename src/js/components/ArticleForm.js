@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 const ArticleForm = (props) => {
   return (
-    <div>
+    <div style={{padding: "6px 8px"}}>
       <TextField
         fullWidth={true}
         multiLine={true}

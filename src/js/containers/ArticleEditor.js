@@ -4,6 +4,7 @@ import {hashHistory} from 'react-router'
 import {initForm, changeBody, submit, clearForm} from '../actions/ArticleFormActions'
 import ArticleForm from '../components/ArticleForm'
 import ArticlePreview from '../components/ArticlePreview'
+import TagForm from '../containers/TagForm'
 
 class ArticleEditor extends Component{
   constructor(props){
@@ -33,7 +34,8 @@ class ArticleEditor extends Component{
 
     return(
       <div className="fullHeight">
-        <div className="fullHeight col-xs-6 no-gutter" style={{padding: "0 8px", borderRight: "1px solid #EEE"}}>
+        <div className="fullHeight col-xs-6 no-gutter" style={{borderRight: "1px solid #EEE"}}>
+          <TagForm />
           <ArticleForm
             form={articleForm}
             onBodyChange={this.handleBodyChange}
@@ -50,7 +52,7 @@ class ArticleEditor extends Component{
 
   handleSubmit(e){
     e.stopPropagation()
-    this.props.dispatch(this.props.submit(this.props.articleForm.id, this.props.articleForm.body))
+    this.props.dispatch(this.props.submit(this.props.articleForm.id, this.props.articleForm.body, this.props.articleForm.tags))
   }
 
   handleBodyChange(e){
