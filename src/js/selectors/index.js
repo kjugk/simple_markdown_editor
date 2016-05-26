@@ -11,7 +11,6 @@ export const getSelectedArticle = createSelector(
   }
 )
 
-
 //TODO sort順のstateで、ロジックを分ける
 export const getSordedArticles = createSelector(
   [ getArticles ],
@@ -19,5 +18,17 @@ export const getSordedArticles = createSelector(
     return articles.sort((a, b) => {
       return moment(a.updatedAt).isBefore(b.updatedAt) ? 1 : -1
     })
+  }
+)
+
+export const getAllTags = createSelector(
+  [ getArticles ],
+  (articles) => {
+    let tags = []
+    articles.forEach((a) => {
+      tags.push(...a.tags)
+    })
+
+    return [...new Set(tags)]
   }
 )

@@ -6,7 +6,7 @@ import VerticalMenu from './VerticalMenu'
 import HorizontalMenu from './HorizontalMenu'
 
 import {selectArticle} from '../actions/ArticleActions'
-import {getSelectedArticle, getSordedArticles} from '../selectors'
+import {getSelectedArticle, getSordedArticles, getAllTags} from '../selectors'
 
 class ArticleViewer extends Component{
   render(){
@@ -41,6 +41,7 @@ class ArticleViewer extends Component{
 ArticleViewer.propTypes = {
   articles: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
+  tags: PropTypes.array.isRequired,
   selectedArticle: PropTypes.object,
   selectArticle: PropTypes.func.isRequired,
 }
@@ -49,6 +50,7 @@ function mapStateToProps(state){
   return{
     articles: state.articles,
     items: getSordedArticles(state),
+    tags: getAllTags(state),
     selectedArticle: getSelectedArticle(state),
     selectArticle,
   }

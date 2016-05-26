@@ -8,19 +8,20 @@ const TagInput = (props) => {
       {props.isEditing &&
         <TextField
           name="hoge"
-          style={{width: "100px", height: "34px"}}
-          textareaStyle={{fontSize: "0.9em"}}
+          style={{marginLeft: "8px", width: "100px"}}
           onBlur={props.onBlur}
           onKeyDown={props.onKeyDown}
           autoFocus={true}
           />
       }
 
-      <AddButton
-        onClick={props.onAddClick}
-        disabled={props.isEditing}
-        style={{width: "36px", height: "36px", padding: "6px"}}
-        />
+      {!props.isEditing &&
+        <AddButton
+          onClick={props.onAddClick}
+          disabled={props.isEditing}
+          style={{width: "36px", height: "36px", padding: "6px"}}
+          />
+      }
     </div>
   )
 }

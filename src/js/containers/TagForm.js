@@ -15,7 +15,7 @@ class TagForm extends Component {
   render(){
     return (
       <section
-        style={{padding: "5px 8px", borderBottom: "1px solid #EEEEEE"}}
+        style={{height: "48px", paddingLeft: "8px", borderBottom: "1px solid #EEEEEE"}}
         className="flex-container flex-align-center flex-wrap"
         >
         <LocalOffer />
