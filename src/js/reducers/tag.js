@@ -1,0 +1,23 @@
+import {SELECT_TAG} from '../actions/TagActions'
+import {SUBMIT_COMPLETE} from '../actions/ArticleFormActions'
+
+const initialState = {
+  selectedTag: ""
+}
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case SELECT_TAG:
+      return Object.assign({}, state, {
+        selectedTag: action.tag
+      })
+
+    case SUBMIT_COMPLETE:
+      return Object.assign({}, state, {
+        selectedTag: ""
+      })
+
+    default:
+      return state
+  }
+}

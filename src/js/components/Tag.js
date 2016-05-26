@@ -3,8 +3,9 @@ import Cancel from 'material-ui/svg-icons/navigation/cancel'
 
 const Tag = (props) => {
   return (
-    <div style={{margin: "0 5px"}} className="label label-info">
+    <div onClick={props.onClick} style={{marginRight: "5px"}} className="label label-info">
       <span>{props.value}</span>
+
       {props.deletable &&
         <Cancel
           color="#FFFFFF"
@@ -19,11 +20,13 @@ const Tag = (props) => {
 Tag.propTypes = {
   value: PropTypes.string.isRequired,
   deletable: PropTypes.bool,
+  onClick: PropTypes.func,
   onDeleteClick: PropTypes.func
 }
 
 Tag.defaultProps = {
-  deletable: true
+  deletable: true,
+  onClick: ()=>{}
 }
 
 export default Tag

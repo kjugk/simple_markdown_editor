@@ -1,6 +1,6 @@
 import {
-  FETCH_ARTICLES, RECEIVE_ARTICLES, SELECT_ARTICLE, DELETE_ARTICLE}
-from '../actions/ArticleActions'
+  FETCH_ARTICLES, RECEIVE_ARTICLES, SELECT_ARTICLE, DELETE_ARTICLE
+} from '../actions/ArticleActions'
 
 import {SUBMIT_COMPLETE} from '../actions/ArticleFormActions'
 

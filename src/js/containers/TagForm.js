@@ -52,7 +52,6 @@ class TagForm extends Component {
   }
 
   handleChange(e){
-    console.log(e.keyCode)
     //enter, tag, esc かつ、valueが存在している場合のみ、actionを呼び出す
     if(e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9 || e.keyCode === 27){
       e.preventDefault()

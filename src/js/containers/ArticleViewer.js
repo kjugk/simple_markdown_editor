@@ -4,13 +4,15 @@ import ArticleList from '../components/ArticleList'
 import ArticlePreview from '../components/ArticlePreview'
 import VerticalMenu from './VerticalMenu'
 import HorizontalMenu from './HorizontalMenu'
+import SelectedTag from '../components/SelectedTag'
 
 import {selectArticle} from '../actions/ArticleActions'
-import {getSelectedArticle, getSordedArticles, getAllTags} from '../selectors'
+import {selectTag} from '../actions/TagActions'
+import {getSelectedArticle, getSordedArticles, getAllTags, getArticlesByTag} from '../selectors'
 
 class ArticleViewer extends Component{
   render(){
-    const{articles, items, selectedArticle, selectArticle, dispatch} = this.props
+    const{articles, items, selectedArticle, selectedTag, selectArticle, selectTag, dispatch} = this.props
 
     return(
       <div className="fluid-container fullHeight">
@@ -19,19 +21,26 @@ class ArticleViewer extends Component{
         <div className="col-xs-6 col-lg-4 no-gutter article-list-box fullHeight">
           <VerticalMenu />
 
-          <ArticleList
-            selectedId={articles.selectedId}
-            items={items}
-            onItemClick={(id)=>{dispatch(selectArticle(id))}}
-            />
+          <div style={{overflow: "hidden"}}>
+            <SelectedTag
+              tag={selectedTag}
+              onDeleteClick={()=>{
+                dispatch(selectTag(""))
+              }}
+              />
+
+            <ArticleList
+              selectedId={articles.selectedId}
+              items={items}
+              onItemClick={(id)=>{
+                dispatch(selectArticle(id))
+              }}
+              />
+          </div>
         </div>
 
         <div className="col-xs-6 col-lg-8 no-gutter">
-          { !!articles.selectedId &&
-            <div>
-              <ArticlePreview articleBody={selectedArticle.body || ""} />
-            </div>
-          }
+          <ArticlePreview articleBody={selectedArticle.body || ""} tags={selectedArticle.tags}/>
         </div>
       </div>
     )
@@ -43,16 +52,20 @@ ArticleViewer.propTypes = {
   items: PropTypes.array.isRequired,
   tags: PropTypes.array.isRequired,
   selectedArticle: PropTypes.object,
+  selectedTag: PropTypes.string,
   selectArticle: PropTypes.func.isRequired,
+  selectTag: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state){
   return{
     articles: state.articles,
-    items: getSordedArticles(state),
+    items: getArticlesByTag(state),
     tags: getAllTags(state),
     selectedArticle: getSelectedArticle(state),
+    selectedTag: state.tag.selectedTag,
     selectArticle,
+    selectTag
   }
 }
 
