@@ -3,10 +3,12 @@ import {
 } from '../actions/ArticleActions'
 
 import {SUBMIT_COMPLETE} from '../actions/ArticleFormActions'
+import {SELECT_TAG} from '../actions/TagActions'
 
 const initialState = {
   isFetching: false,
   selectedId: null,
+  selectedIdx: -1,
   items: []
 }
 
@@ -26,7 +28,7 @@ export default function articles(state = initialState, action) {
 
     case SELECT_ARTICLE:
       return Object.assign({}, state, {
-        selectedId: action.articleId
+        selectedId: action.articleId,
       })
 
     case SUBMIT_COMPLETE:
@@ -40,6 +42,11 @@ export default function articles(state = initialState, action) {
       return Object.assign({}, state, {
         items: newItems,
         selectedId: newItems.length >= 1 ? newItems[0].id : null
+      })
+
+    case SELECT_TAG:
+      return Object.assign({}, state, {
+        selectedId: null
       })
 
     default:

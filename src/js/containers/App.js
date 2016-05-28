@@ -10,6 +10,7 @@ class App extends Component {
   }
 
   render(){
+    const { dispatch, articles, children } = this.props
     return(
       <div className="fullHeight">
         <header style={{borderBottom: "1px solid #eeeeee", padding: "20px 6px 10px 6px"}}>
@@ -19,8 +20,8 @@ class App extends Component {
           </div>
         </header>
 
-        {this.props.articles.isFetching && <Progress />}
-        {!this.props.articles.isFetching && this.props.children}
+        {articles.isFetching && <Progress />}
+        {!articles.isFetching && children}
       </div>
     )
   }

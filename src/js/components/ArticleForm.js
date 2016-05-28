@@ -18,7 +18,7 @@ const ArticleForm = (props) => {
         className="fullWidth"
         primary={true}
         label="save"
-        disabled={props.form.body === ""}
+        disabled={props.form.body.trim() === ""}
         onClick={props.onSubmit}
         />
     </div>

@@ -54,6 +54,16 @@ h1, h2, h4{
   background-color: rgba(0, 0, 0, 0.870588);
 }
 
+.vertical-menu{
+  float: left;
+  text-align: center;
+  border-right: 1px solid #eeeeee;
+}
+
+.horizontal-menu{
+  border-bottom: 1px solid #eeeeee;
+}
+
 @media screen and (max-width: 767px) {
   .vertical-menu{
     display: none;
@@ -71,9 +81,9 @@ h1, h2, h4{
 }
 
 .article-list-item{
-  word-break: break-all;
+  word-wrap: break-word;
 }
 
-.article-list-item.selected{
+.selected{
   background-color: #eeeeee!important;
 }

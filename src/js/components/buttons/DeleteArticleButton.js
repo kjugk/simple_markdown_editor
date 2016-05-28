@@ -22,11 +22,12 @@ const DeleteArticleButton = (props) => {
 
 DeleteArticleButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   style: PropTypes.object,
   iconStyle: PropTypes.object
 }
 DeleteArticleButton.defaultProps = {
+  disabled: false,
   style: {},
   iconStyle: {}
 }

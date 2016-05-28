@@ -1,12 +1,12 @@
 import {
-  INIT_FORM_COMPLETE, CHANGE_BODY, SUBMIT_COMPLETE, CLEAR_FORM, SUBMIT_TAG, DELETE_TAG
+  INIT_FORM_COMPLETE, CHANGE_BODY, SUBMIT_COMPLETE, CLEAR_FORM, ADD_TAG, DELETE_TAG
 } from '../actions/ArticleFormActions'
 
 const initialState = {
   id: null,
   body: "",
+  tags: [],
   isSubmitComplete: false,
-  tags: []
 }
 
 export default (state = initialState, action) => {
@@ -23,14 +23,14 @@ export default (state = initialState, action) => {
         body: action.body
       })
 
-    case SUBMIT_TAG:
+    case ADD_TAG:
       return Object.assign({}, state, {
         tags: [...new Set([...state.tags, action.tag])]
       })
 
     case DELETE_TAG:
       return Object.assign({}, state, {
-        tags: state.tags.filter((t) => { return t !== action.tag})
+        tags: state.tags.filter((t) => {return t !== action.tag})
       })
 
     case SUBMIT_COMPLETE:

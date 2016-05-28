@@ -29,7 +29,7 @@ export const getArticlesByTag = createSelector(
       return articles
     } else {
       return articles.filter((article) => {
-        return article.tags.indexOf(tag) >= 0
+        return article.tags && article.tags.indexOf(tag) >= 0
       })
     }
   }

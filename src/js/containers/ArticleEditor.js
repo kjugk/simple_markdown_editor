@@ -5,6 +5,7 @@ import {initForm, changeBody, submit, clearForm} from '../actions/ArticleFormAct
 import ArticleForm from '../components/ArticleForm'
 import ArticlePreview from '../components/ArticlePreview'
 import TagForm from '../containers/TagForm'
+import {getSelectedArticle} from '../selectors'
 
 class ArticleEditor extends Component{
   constructor(props){
@@ -14,8 +15,9 @@ class ArticleEditor extends Component{
   }
 
   componentDidMount(){
-    if(!!this.props.params.articleId){
-      this.props.dispatch(this.props.initForm(this.props.params.articleId))
+    const { params, dispatch, initForm} = this.props
+    if(!!params.articleId){
+      dispatch(initForm(params.articleId))
     }
   }
 
@@ -36,10 +38,11 @@ class ArticleEditor extends Component{
       <div className="fullHeight">
         <div className="fullHeight col-xs-6 no-gutter" style={{borderRight: "1px solid #EEE"}}>
           <TagForm />
+
           <ArticleForm
             form={articleForm}
-            onBodyChange={this.handleBodyChange}
-            onSubmit={this.handleSubmit}
+            onBodyChange={this.handleBodyChange.bind(this)}
+            onSubmit={this.handleSubmit.bind(this)}
             />
         </div>
 
@@ -52,16 +55,21 @@ class ArticleEditor extends Component{
 
   handleSubmit(e){
     e.stopPropagation()
-    this.props.dispatch(this.props.submit(this.props.articleForm.id, this.props.articleForm.body, this.props.articleForm.tags))
+
+    const { dispatch, submit, articleForm } = this.props
+    dispatch(submit(articleForm.id, articleForm.body, articleForm.tags))
   }
 
   handleBodyChange(e){
     e.stopPropagation()
-    this.props.dispatch(this.props.changeBody(e.target.value))
+
+    const { dispatch, changeBody } = this.props
+    dispatch(changeBody(e.target.value))
   }
 }
 
 ArticleEditor.propTypes = {
+  selectedArticle: PropTypes.object.isRequired,
   articleForm: PropTypes.object.isRequired,
   initForm: PropTypes.func.isRequired,
   changeBody: PropTypes.func.isRequired,
@@ -71,6 +79,7 @@ ArticleEditor.propTypes = {
 
 function mapStateToProps(state){
   return{
+    selectedArticle: getSelectedArticle(state),
     articleForm: state.articleForm,
     initForm,
     changeBody,

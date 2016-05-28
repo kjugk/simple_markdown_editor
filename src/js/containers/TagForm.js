@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react'
 import {connect} from 'react-redux'
-import {submitTag, deleteTag} from '../actions/ArticleFormActions'
+import {addTag, deleteTag} from '../actions/ArticleFormActions'
 import styles from '../components/styles'
 import LocalOffer from 'material-ui/svg-icons/maps/local-offer'
 import Tag from '../components/Tag'
@@ -15,7 +15,7 @@ class TagForm extends Component {
   render(){
     return (
       <section
-        style={{height: "48px", paddingLeft: "8px", borderBottom: "1px solid #EEEEEE"}}
+        style={{minHeight: "50px", paddingLeft: "8px", borderBottom: "1px solid #EEEEEE"}}
         className="flex-container flex-align-center flex-wrap"
         >
         <LocalOffer />
@@ -41,8 +41,8 @@ class TagForm extends Component {
   }
 
   submit(v){
-    if(v !== ""){
-      this.props.dispatch(this.props.submitTag(v))
+    if(v){
+      this.props.dispatch(this.props.addTag(v))
     }
     this.setState({isEditing: false})
   }
@@ -70,14 +70,14 @@ class TagForm extends Component {
 
 TagForm.propTypes = {
   tags: PropTypes.array.isRequired,
-  submitTag: PropTypes.func.isRequired,
+  addTag: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state){
   return{
     tags: state.articleForm.tags,
-    submitTag,
+    addTag,
     deleteTag
   }
 }

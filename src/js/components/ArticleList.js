@@ -16,10 +16,14 @@ const renderListItems = (props) => {
     return (
       <div key={item.id}>
         <ListItem
-          className={getClassName(item, props.selectedId)}
+          className={`article-list-item ${getClassName(item, props.selectedId)}`}
           onClick={()=>{props.onItemClick(item.id)}}
-          primaryText={renderTitle(item.body)}
-          secondaryText={<span style={{fontSize: "12px"}}>{moment(item.updatedAt).format('YYYY/MM/DD HH:mm')}</span>}
+          primaryText={getTitle(item.body)}
+          secondaryText={
+            <div style={{fontSize: "12px"}}>
+              {moment(item.updatedAt).format('YYYY/MM/DD HH:mm')}
+            </div>
+          }
           />
         <Divider />
       </div>
@@ -27,17 +31,13 @@ const renderListItems = (props) => {
   })
 }
 
-const renderTitle = (body) => {
+const getTitle = (body) => {
   let title = body.split(/\n/)[0]
   return title ? title : "未設定"
 }
 
 const getClassName = (item, selectedId) => {
-  let name = "article-list-item"
-  if(item.id === selectedId){
-    return `${name} selected`
-  }
-  return name
+  return item.id === selectedId ? "selected" : ""
 }
 
 ArticleList.propTypes = {

@@ -5,7 +5,7 @@ import marked from 'marked'
 const ArticlePreview = (props) => {
   return (
     <div style={{padding: "10px 8px"}}>
-      {props.tags !== [] &&
+      {props.tags && props.tags.length >= 1 &&
         <div>
           {props.tags.map((t, i)=>{
             return <Tag key={i} value={t} deletable={false} />

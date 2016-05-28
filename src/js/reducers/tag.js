@@ -1,8 +1,9 @@
-import {SELECT_TAG} from '../actions/TagActions'
+import {SELECT_TAG, TOGGLE_DRAWER} from '../actions/TagActions'
 import {SUBMIT_COMPLETE} from '../actions/ArticleFormActions'
 
 const initialState = {
-  selectedTag: ""
+  selectedTag: "",
+  isDrawerOpen: false,
 }
 
 export default (state = initialState, action) => {
@@ -15,6 +16,11 @@ export default (state = initialState, action) => {
     case SUBMIT_COMPLETE:
       return Object.assign({}, state, {
         selectedTag: ""
+      })
+
+    case TOGGLE_DRAWER:
+      return Object.assign({}, state, {
+        isDrawerOpen: !state.isDrawerOpen
       })
 
     default:

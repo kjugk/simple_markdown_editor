@@ -10,7 +10,9 @@ const Tag = (props) => {
         <Cancel
           color="#FFFFFF"
           style={{verticalAlign: "middle", width: "14px", height: "14px", marginLeft: "5px"}}
-          onClick={()=>{props.onDeleteClick(props.value)}}
+          onClick={() => {
+            props.onDeleteClick(props.value)
+          }}
           />
       }
     </div>
@@ -26,7 +28,8 @@ Tag.propTypes = {
 
 Tag.defaultProps = {
   deletable: true,
-  onClick: ()=>{}
+  onClick: ()=>{},
+  onDeleteClick: ()=>{}
 }
 
 export default Tag

@@ -22,12 +22,13 @@ const EditArticleButton = (props) => {
 
 EditArticleButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   style: PropTypes.object,
   iconStyle: PropTypes.object
 }
 
 EditArticleButton.defaultProps = {
+  disabled: false,
   style: {},
   iconStyle: {}
 }

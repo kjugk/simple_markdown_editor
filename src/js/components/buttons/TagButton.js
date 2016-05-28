@@ -22,12 +22,13 @@ const TagButton = (props) => {
 
 TagButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   style: PropTypes.object,
   iconStyle: PropTypes.object
 }
 
 TagButton.defaultProps = {
+  disabled: false,
   style: {},
   iconStyle: {}
 }
