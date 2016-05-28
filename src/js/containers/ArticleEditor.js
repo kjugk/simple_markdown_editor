@@ -5,24 +5,18 @@ import {initForm, changeBody, submit, clearForm} from '../actions/ArticleFormAct
 import ArticleForm from '../components/ArticleForm'
 import ArticlePreview from '../components/ArticlePreview'
 import TagForm from '../containers/TagForm'
-import {getSelectedArticle} from '../selectors'
 
 class ArticleEditor extends Component{
-  constructor(props){
-    super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleBodyChange = this.handleBodyChange.bind(this)
-  }
-
   componentDidMount(){
     const { params, dispatch, initForm} = this.props
+
     if(!!params.articleId){
       dispatch(initForm(params.articleId))
     }
   }
 
   componentDidUpdate(){
-    if(this.props.articleForm.isSubmitComplete){
+    if(this.props.articleForm.get('isSubmitComplete')){
       hashHistory.push('/')
     }
   }
@@ -40,14 +34,14 @@ class ArticleEditor extends Component{
           <TagForm />
 
           <ArticleForm
-            form={articleForm}
+            body={articleForm.get('body')}
             onBodyChange={this.handleBodyChange.bind(this)}
             onSubmit={this.handleSubmit.bind(this)}
             />
         </div>
 
         <div className="col-xs-6 no-gutter">
-          <ArticlePreview articleBody={articleForm.body} />
+          <ArticlePreview articleBody={articleForm.get('body')} />
         </div>
       </div>
     )
@@ -57,7 +51,7 @@ class ArticleEditor extends Component{
     e.stopPropagation()
 
     const { dispatch, submit, articleForm } = this.props
-    dispatch(submit(articleForm.id, articleForm.body, articleForm.tags))
+    dispatch(submit(articleForm.get('id'), articleForm.get('body'), articleForm.get('tags')))
   }
 
   handleBodyChange(e){
@@ -69,7 +63,6 @@ class ArticleEditor extends Component{
 }
 
 ArticleEditor.propTypes = {
-  selectedArticle: PropTypes.object.isRequired,
   articleForm: PropTypes.object.isRequired,
   initForm: PropTypes.func.isRequired,
   changeBody: PropTypes.func.isRequired,
@@ -79,7 +72,6 @@ ArticleEditor.propTypes = {
 
 function mapStateToProps(state){
   return{
-    selectedArticle: getSelectedArticle(state),
     articleForm: state.articleForm,
     initForm,
     changeBody,

@@ -1,14 +1,15 @@
 import { createSelector } from 'reselect'
 import moment from 'moment'
+import Immutable from 'immutable'
 
 const getSelectedId = (state) => state.articles.selectedId
-const getSelectedTag = (state) => state.tag.selectedTag
 const getArticles = (state) => state.articles.items
+const getSelectedTag = (state) => state.tag.get('selectedTag')
 
 export const getSelectedArticle = createSelector(
   [ getSelectedId, getArticles ],
   (selectedId, articles) => {
-    return articles.filter(a => a.id === selectedId)[0] || {}
+    return articles.filter(a => a.id === selectedId).first() || {}
   }
 )
 
@@ -27,6 +28,7 @@ export const getArticlesByTag = createSelector(
   (articles, tag) => {
     if(tag === ""){
       return articles
+
     } else {
       return articles.filter((article) => {
         return article.tags && article.tags.indexOf(tag) >= 0
@@ -38,11 +40,11 @@ export const getArticlesByTag = createSelector(
 export const getAllTags = createSelector(
   [ getArticles ],
   (articles) => {
-    let tags = []
+    let tags = Immutable.Set([])
     articles.forEach((a) => {
-      tags.push(...a.tags)
+      tags = tags.concat(a.tags)
     })
 
-    return [...new Set(tags)]
+    return tags
   }
 )

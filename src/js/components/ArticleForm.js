@@ -11,14 +11,14 @@ const ArticleForm = (props) => {
         hintText="1行目はタイトルです"
         hintStyle={{fontSize: "0.9em"}}
         onChange={props.onBodyChange}
-        value={props.form.body}
+        value={props.body}
         />
 
       <RaisedButton
         className="fullWidth"
         primary={true}
         label="save"
-        disabled={props.form.body.trim() === ""}
+        disabled={props.body.trim() === ""}
         onClick={props.onSubmit}
         />
     </div>
@@ -26,7 +26,7 @@ const ArticleForm = (props) => {
 }
 
 ArticleForm.propTypes = {
-  form: PropTypes.object.isRequired,
+  body: PropTypes.string.isRequired,
   onBodyChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 }

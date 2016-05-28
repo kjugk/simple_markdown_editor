@@ -37,7 +37,7 @@ class TagDrawer extends Component {
 }
 
 TagDrawer.propTypes = {
-  tags: PropTypes.array.isRequired,
+  tags: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   selectTag: PropTypes.func.isRequired,
   toggleDrawer: PropTypes.func.isRequired
@@ -46,7 +46,7 @@ TagDrawer.propTypes = {
 function mapStateToProps(state){
   return{
     tags: getAllTags(state),
-    open: state.tag.isDrawerOpen,
+    open: state.tag.get('isDrawerOpen'),
     selectTag,
     toggleDrawer
   }

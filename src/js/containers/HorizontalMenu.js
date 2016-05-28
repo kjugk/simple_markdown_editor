@@ -22,7 +22,7 @@ class HorizontalMenu extends Component {
         </div>
         <div>
           <TagButton
-            disabled={tags.length <= 0}
+            disabled={tags.isEmpty()}
             onClick={this.handleToggleDrawer.bind(this)}
             />
         </div>
@@ -60,7 +60,7 @@ class HorizontalMenu extends Component {
 
 HorizontalMenu.propTypes = {
   articles: PropTypes.object.isRequired,
-  tags: PropTypes.array.isRequired,
+  tags: PropTypes.object.isRequired,
   deleteArticle: PropTypes.func.isRequired,
   toggleDrawer: PropTypes.func.isRequired
 }

@@ -13,8 +13,8 @@ import {getSelectedArticle, getSordedArticles, getAllTags, getArticlesByTag} fro
 
 class ArticleViewer extends Component{
   componentDidUpdate(){
-    if(this.props.items.length >= 1 && !this.props.articles.selectedId){
-      this.props.dispatch(selectArticle(this.props.items[0].id))
+    if(!this.props.items.isEmpty() && !this.props.articles.selectedId){
+      this.props.dispatch(selectArticle(this.props.items.first().id))
     }
   }
 
@@ -61,7 +61,7 @@ class ArticleViewer extends Component{
 
 ArticleViewer.propTypes = {
   articles: PropTypes.object.isRequired,
-  items: PropTypes.array.isRequired,
+  items: PropTypes.object.isRequired,
   selectedArticle: PropTypes.object,
   selectedTag: PropTypes.string,
   selectArticle: PropTypes.func.isRequired,
@@ -73,7 +73,7 @@ function mapStateToProps(state){
     articles: state.articles,
     items: getArticlesByTag(state),
     selectedArticle: getSelectedArticle(state),
-    selectedTag: state.tag.selectedTag,
+    selectedTag: state.tag.get('selectedTag'),
     selectArticle,
     selectTag
   }

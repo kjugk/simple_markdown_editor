@@ -1,3 +1,4 @@
+import Immutable from 'immutable'
 import {
   FETCH_ARTICLES, RECEIVE_ARTICLES, SELECT_ARTICLE, DELETE_ARTICLE
 } from '../actions/ArticleActions'
@@ -9,7 +10,7 @@ const initialState = {
   isFetching: false,
   selectedId: null,
   selectedIdx: -1,
-  items: []
+  items: Immutable.List([])
 }
 
 export default function articles(state = initialState, action) {
@@ -23,7 +24,7 @@ export default function articles(state = initialState, action) {
       return Object.assign({}, state, {
         isFetching: false,
         selectedId: action.articles.length >= 1 ? action.articles[0].id : null,
-        items: action.articles
+        items: Immutable.List(action.articles)
       })
 
     case SELECT_ARTICLE:
@@ -34,14 +35,14 @@ export default function articles(state = initialState, action) {
     case SUBMIT_COMPLETE:
       return Object.assign({}, state, {
         selectedId: action.articleId,
-        items: action.articles
+        items: Immutable.List(action.articles)
       })
 
     case DELETE_ARTICLE:
       const newItems = state.items.filter((item)=>{return item.id !== action.articleId})
       return Object.assign({}, state, {
         items: newItems,
-        selectedId: newItems.length >= 1 ? newItems[0].id : null
+        selectedId: newItems.isEmpty() ? null : newItems.first().id
       })
 
     case SELECT_TAG:

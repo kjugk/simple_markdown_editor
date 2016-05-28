@@ -69,14 +69,14 @@ class TagForm extends Component {
 }
 
 TagForm.propTypes = {
-  tags: PropTypes.array.isRequired,
+  tags: PropTypes.object.isRequired,
   addTag: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state){
   return{
-    tags: state.articleForm.tags,
+    tags: state.articleForm.get('tags'),
     addTag,
     deleteTag
   }

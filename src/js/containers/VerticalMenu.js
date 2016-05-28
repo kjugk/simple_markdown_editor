@@ -26,7 +26,7 @@ class VerticalMenu extends Component {
         </div>
         <div>
           <TagButton
-            disabled={tags.length <= 0}
+            disabled={tags.isEmpty()}
             onClick={this.handleToggleDrawer.bind(this)}
             />
         </div>
@@ -67,7 +67,7 @@ class VerticalMenu extends Component {
 
 VerticalMenu.propTypes = {
   articles: PropTypes.object.isRequired,
-  tags: PropTypes.array.isRequired,
+  tags: PropTypes.object.isRequired,
   deleteArticle: PropTypes.func.isRequired,
   toggleDrawer: PropTypes.func.isRequired
 }

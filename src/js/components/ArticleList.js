@@ -42,7 +42,7 @@ const getClassName = (item, selectedId) => {
 
 ArticleList.propTypes = {
   selectedId: PropTypes.string,
-  items: PropTypes.array.isRequired,
+  items: PropTypes.object.isRequired,
   onItemClick: PropTypes.func.isRequired
 }
 
