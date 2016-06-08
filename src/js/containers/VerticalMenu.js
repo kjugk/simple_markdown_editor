@@ -11,6 +11,13 @@ import {getAllTags} from '../selectors'
 import styles from '../components/styles'
 
 class VerticalMenu extends Component {
+  constructor(props){
+    super(props)
+    this.handleCreateClick = this.handleCreateClick.bind(this)
+    this.handleToggleDrawer = this.handleToggleDrawer.bind(this)
+    this.handleEditClick = this.handleEditClick.bind(this)
+    this.handleDeleteClick = this.handleDeleteClick.bind(this)
+  }
 
   render(){
     const{ articles, tags } = this.props
@@ -27,19 +34,19 @@ class VerticalMenu extends Component {
         <div>
           <TagButton
             disabled={tags.isEmpty()}
-            onClick={this.handleToggleDrawer.bind(this)}
+            onClick={this.handleToggleDrawer}
             />
         </div>
         <div style={{marginTop: "10px"}}>
           <EditArticleButton
             disabled={articles.selectedId === null}
-            onClick={this.handleEditClick.bind(this)}
+            onClick={this.handleEditClick}
             />
         </div>
         <div>
           <DeleteArticleButton
             disabled={articles.selectedId === null}
-            onClick={this.handleDeleteClick.bind(this)}
+            onClick={this.handleDeleteClick}
             />
         </div>
       </div>

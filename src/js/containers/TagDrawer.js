@@ -8,12 +8,14 @@ import LocalOffer from 'material-ui/svg-icons/maps/local-offer'
 
 class TagDrawer extends Component {
   render(){
+    const {open, dispatch, selectTag, selectDrawer} = this.props
+
     return (
       <Drawer
         docked={false}
-        open={this.props.open}
+        open={open}
         onRequestChange={(openDrawer) => {
-          this.props.dispatch(toggleDrawer())
+          dispatch(toggleDrawer())
         }}
         >
         <List>
@@ -24,8 +26,8 @@ class TagDrawer extends Component {
                 primaryText={t}
                 leftIcon={<LocalOffer color="#000000"/>}
                 onTouchTap={()=>{
-                  this.props.dispatch(selectTag(t))
-                  this.props.dispatch(toggleDrawer())
+                  dispatch(selectTag(t))
+                  dispatch(toggleDrawer())
                 }}
                 />
             )

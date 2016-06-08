@@ -12,18 +12,22 @@ const ArticleList = (props) => {
 }
 
 const renderListItems = (props) => {
-  return props.items.map(item => {
+  const {items, selectedId, onItemClick} = props
+
+  return items.map(item => {
     return (
       <div key={item.id}>
         <ListItem
-          className={`article-list-item ${getClassName(item, props.selectedId)}`}
-          onClick={()=>{props.onItemClick(item.id)}}
+          className={`article-list-item ${getClassName(item, selectedId)}`}
           primaryText={getTitle(item.body)}
           secondaryText={
             <div style={{fontSize: "12px"}}>
               {moment(item.updatedAt).format('YYYY/MM/DD HH:mm')}
             </div>
           }
+          onClick={()=>{
+            onItemClick(item.id)
+          }}
           />
         <Divider />
       </div>

@@ -7,6 +7,12 @@ import ArticlePreview from '../components/ArticlePreview'
 import TagForm from '../containers/TagForm'
 
 class ArticleEditor extends Component{
+  constructor(props){
+    super(props)
+    this.handleBodyChange = this.handleBodyChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
   componentDidMount(){
     const { params, dispatch, initForm} = this.props
 
@@ -35,8 +41,8 @@ class ArticleEditor extends Component{
 
           <ArticleForm
             body={articleForm.get('body')}
-            onBodyChange={this.handleBodyChange.bind(this)}
-            onSubmit={this.handleSubmit.bind(this)}
+            onBodyChange={this.handleBodyChange}
+            onSubmit={this.handleSubmit}
             />
         </div>
 

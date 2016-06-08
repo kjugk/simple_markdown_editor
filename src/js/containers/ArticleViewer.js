@@ -12,9 +12,12 @@ import {selectTag} from '../actions/TagActions'
 import {getSelectedArticle, getSordedArticles, getAllTags, getArticlesByTag} from '../selectors'
 
 class ArticleViewer extends Component{
+
   componentDidUpdate(){
-    if(!this.props.items.isEmpty() && !this.props.articles.selectedId){
-      this.props.dispatch(selectArticle(this.props.items.first().id))
+    const {items, articles, dispatch, selectArticle} = this.props
+
+    if(!items.isEmpty() && !articles.selectedId){
+      dispatch(selectArticle(items.first().id))
     }
   }
 

@@ -10,6 +10,14 @@ import TagButton from '../components/buttons/TagButton'
 import {getAllTags} from '../selectors'
 
 class HorizontalMenu extends Component {
+  constructor(props){
+    super(props)
+    this.handleCreateClick = this.handleCreateClick.bind(this)
+    this.handleToggleDrawer = this.handleToggleDrawer.bind(this)
+    this.handleEditClick = this.handleEditClick.bind(this)
+    this.handleDeleteClick = this.handleDeleteClick.bind(this)
+  }
+
   render(){
     const{ articles, tags } = this.props
 
@@ -17,24 +25,24 @@ class HorizontalMenu extends Component {
       <div className="horizontal-menu flex-container flex-align-center" >
         <div>
           <CreateArticleButton
-            onClick={this.handleCreateClick.bind(this)}
+            onClick={this.handleCreateClick}
             />
         </div>
         <div>
           <TagButton
             disabled={tags.isEmpty()}
-            onClick={this.handleToggleDrawer.bind(this)}
+            onClick={this.handleToggleDrawer}
             />
         </div>
 
         <div style={{marginLeft: "auto"}}>
           <EditArticleButton
             disabled={articles.selectedId === null}
-            onClick={this.handleEditClick.bind(this)}
+            onClick={this.handleEditClick}
             />
           <DeleteArticleButton
             disabled={articles.selectedId === null}
-            onClick={this.handleDeleteClick.bind(this)}
+            onClick={this.handleDeleteClick}
             />
         </div>
       </div>
@@ -50,11 +58,13 @@ class HorizontalMenu extends Component {
   }
 
   handleDeleteClick(){
-    this.props.dispatch(this.props.deleteArticle(this.props.articles.selectedId))
+    const {dispatch, deleteArticle, articles} = this.props
+    dispatch(deleteArticle(articles.selectedId))
   }
 
   handleToggleDrawer(){
-    this.props.dispatch(this.props.toggleDrawer())
+    const {dispatch, toggleDrawer} = this.props
+    dispatch(toggleDrawer())
   }
 }
 

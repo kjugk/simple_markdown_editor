@@ -10,6 +10,10 @@ class TagForm extends Component {
   constructor(props){
     super(props)
     this.state = {isEditing: false}
+    this.handleDelete = this.handleDelete.bind(this)
+    this.handleBlur = this.handleBlur.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleAddClick = this.handleAddClick.bind(this)
   }
 
   render(){
@@ -25,25 +29,27 @@ class TagForm extends Component {
             <Tag
               key={i}
               value={tag}
-              onDeleteClick={this.handleDelete.bind(this)}
+              onDeleteClick={this.handleDelete}
               />
           )
         })}
 
         <TagInput
           isEditing={this.state.isEditing}
-          onBlur={this.handleBlur.bind(this)}
-          onKeyDown={this.handleChange.bind(this)}
-          onAddClick={this.handleAddClick.bind(this)}
+          onBlur={this.handleBlur}
+          onKeyDown={this.handleChange}
+          onAddClick={this.handleAddClick}
           />
       </section>
     )
   }
 
   submit(v){
+    const {dispatch, addTag} = this.props
     if(v){
-      this.props.dispatch(this.props.addTag(v))
+      dispatch(addTag(v))
     }
+
     this.setState({isEditing: false})
   }
 
@@ -64,7 +70,8 @@ class TagForm extends Component {
   }
 
   handleDelete(tag){
-    this.props.dispatch(this.props.deleteTag(tag))
+    const {dispatch, deleteTag} = this.props
+    dispatch(deleteTag(tag))
   }
 }
 

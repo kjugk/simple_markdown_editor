@@ -9,7 +9,6 @@ import {SELECT_TAG} from '../actions/TagActions'
 const initialState = {
   isFetching: false,
   selectedId: null,
-  selectedIdx: -1,
   items: Immutable.List([])
 }
 
@@ -21,10 +20,11 @@ export default function articles(state = initialState, action) {
       })
 
     case RECEIVE_ARTICLES:
+      const items = Immutable.List(action.articles)
       return Object.assign({}, state, {
         isFetching: false,
-        selectedId: action.articles.length >= 1 ? action.articles[0].id : null,
-        items: Immutable.List(action.articles)
+        selectedId: items.isEmpty() ? null : items.first().id,
+        items
       })
 
     case SELECT_ARTICLE:
