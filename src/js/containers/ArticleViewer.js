@@ -6,13 +6,13 @@ import VerticalMenu from './VerticalMenu'
 import HorizontalMenu from './HorizontalMenu'
 import SelectedTag from '../components/SelectedTag'
 import TagDrawer from './TagDrawer'
+import GlobalMessage from './GlobalMessage'
 
 import {selectArticle} from '../actions/ArticleActions'
 import {selectTag} from '../actions/TagActions'
 import {getSelectedArticle, getSordedArticles, getAllTags, getArticlesByTag} from '../selectors'
 
 class ArticleViewer extends Component{
-
   componentDidUpdate(){
     const {items, articles, dispatch, selectArticle} = this.props
 
@@ -57,6 +57,7 @@ class ArticleViewer extends Component{
         </div>
 
         <TagDrawer />
+        <GlobalMessage />
       </div>
     )
   }
@@ -78,7 +79,7 @@ function mapStateToProps(state){
     selectedArticle: getSelectedArticle(state),
     selectedTag: state.tag.get('selectedTag'),
     selectArticle,
-    selectTag
+    selectTag,
   }
 }
 

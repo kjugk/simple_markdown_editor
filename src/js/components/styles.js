@@ -1,4 +1,8 @@
 export default {
+  buttonLabel: {
+    marginTop: -14,
+    textAlign: "center",
+  },
   smallIcon: {
     width: 36,
     height: 36,

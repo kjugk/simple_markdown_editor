@@ -24,31 +24,23 @@ class VerticalMenu extends Component {
 
     return(
       <div className="vertical-menu fullHeight">
-        <div>
-          <CreateArticleButton
-            onClick={this.handleCreateClick}
-            style={styles.small}
-            iconStyle={styles.smallIcon}
-            />
-        </div>
-        <div>
-          <TagButton
-            disabled={tags.isEmpty()}
-            onClick={this.handleToggleDrawer}
-            />
-        </div>
-        <div style={{marginTop: "10px"}}>
-          <EditArticleButton
-            disabled={articles.selectedId === null}
-            onClick={this.handleEditClick}
-            />
-        </div>
-        <div>
-          <DeleteArticleButton
-            disabled={articles.selectedId === null}
-            onClick={this.handleDeleteClick}
-            />
-        </div>
+        <CreateArticleButton
+          onClick={this.handleCreateClick}
+          style={styles.small}
+          iconStyle={styles.smallIcon}
+          />
+        <TagButton
+          disabled={tags.isEmpty()}
+          onClick={this.handleToggleDrawer}
+          />
+        <EditArticleButton
+          disabled={articles.selectedId === null}
+          onClick={this.handleEditClick}
+          />
+        <DeleteArticleButton
+          disabled={articles.selectedId === null}
+          onClick={this.handleDeleteClick}
+          />
       </div>
     )
   }

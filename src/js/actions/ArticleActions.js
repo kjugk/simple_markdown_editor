@@ -23,5 +23,5 @@ export function selectArticle(articleId) {
 
 export function deleteArticle(articleId){
   Storage.deleteArticle(articleId)
-  return {type: DELETE_ARTICLE, articleId}
+  return {type: DELETE_ARTICLE, articleId, message: "Delete complete!!!"}
 }

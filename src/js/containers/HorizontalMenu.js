@@ -23,28 +23,25 @@ class HorizontalMenu extends Component {
 
     return(
       <div className="horizontal-menu flex-container flex-align-center" >
-        <div>
+        <div style={{marginRight: "12px"}}>
           <CreateArticleButton
             onClick={this.handleCreateClick}
             />
         </div>
-        <div>
-          <TagButton
-            disabled={tags.isEmpty()}
-            onClick={this.handleToggleDrawer}
-            />
-        </div>
 
-        <div style={{marginLeft: "auto"}}>
-          <EditArticleButton
-            disabled={articles.selectedId === null}
-            onClick={this.handleEditClick}
-            />
-          <DeleteArticleButton
-            disabled={articles.selectedId === null}
-            onClick={this.handleDeleteClick}
-            />
-        </div>
+        <TagButton
+          disabled={tags.isEmpty()}
+          onClick={this.handleToggleDrawer}
+          />
+
+        <EditArticleButton
+          disabled={articles.selectedId === null}
+          onClick={this.handleEditClick}
+          />
+        <DeleteArticleButton
+          disabled={articles.selectedId === null}
+          onClick={this.handleDeleteClick}
+          />
       </div>
     )
   }

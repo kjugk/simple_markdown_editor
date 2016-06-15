@@ -33,13 +33,16 @@ export function deleteTag(tag) {
 export function submit(articleId, body, tags) {
   let id = articleId ? articleId : shortid.generate()
   let article = {id, body, tags}
+  let message = ""
 
   if(articleId === null){
     Storage.setArticle(article)
+    message = "Create complete!!!"
   } else {
     Storage.updateArticle(article)
+    message = "Update complete!!!"
   }
 
   let articles = Storage.getArticles()
-  return {type: SUBMIT_COMPLETE, articleId: article.id, articles}
+  return {type: SUBMIT_COMPLETE, articleId: article.id, articles, message}
 }
