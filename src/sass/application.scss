@@ -17,6 +17,13 @@
   flex-wrap: wrap;
 }
 
+$COLOR__PRIMARY: #e35344;
+$COLOR__SECONDARY: #ec9d9d;
+$COLOR__SELECTED: #eeeeee;
+$COLOR__TEXT-BASE: #3d4044;
+$COLOR__TEXT-INVERSE: #ffffff;
+$COLOR__BORDER-BASE: #eeeeee;
+
 html, body{
   height: 100%;
   margin: 0;
@@ -24,6 +31,7 @@ html, body{
 }
 
 body, input, textarea{
+  color: $COLOR__TEXT-BASE;
   font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -37,28 +45,33 @@ h1, h2, h3, h4{
 }
 
 .l-header{
-  border-bottom: 1px solid #eeeeee;
+  background-color: $COLOR__PRIMARY;
+  color: $COLOR__TEXT-INVERSE;
   padding: 20px 6px 10px 6px;
+
   div{
     text-align: right;
+    a{
+      color: $COLOR__TEXT-INVERSE;
+    }
   }
 }
 
 .l-article-list{
   overflow: scroll;
-  border-right: 1px solid #EEE;
+  border-right: 1px solid $COLOR__BORDER-BASE;
 }
 
 .l-horizontal-menu{
   @include flex-container;
   @include flex-align-center;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid $COLOR__BORDER-BASE;
 }
 
 .l-vertical-menu{
   float: left;
   text-align: center;
-  border-right: 1px solid #eeeeee;
+  border-right: 1px solid $COLOR__BORDER-BASE;
   height: 100%;
 }
 
@@ -68,7 +81,7 @@ h1, h2, h3, h4{
   @include flex-wrap;
   min-height: 50px;
   padding-left: 8px;
-  border-bottom: 1px solid #EEEEEE;
+  border-bottom: 1px solid $COLOR__BORDER-BASE;
 }
 
 .progress{
@@ -92,8 +105,8 @@ h1, h2, h3, h4{
 }
 
 .label-info{
-  color: #FFFFFF;
-  background-color: rgba(0, 0, 0, 0.870588);
+  color: $COLOR__TEXT-INVERSE;
+  background-color: $COLOR__TEXT-BASE;
 }
 
 @media screen and (max-width: 767px) {
@@ -113,5 +126,5 @@ h1, h2, h3, h4{
 }
 
 .is-selected{
-  background-color: #eeeeee!important;
+  background-color: $COLOR__SELECTED!important;
 }

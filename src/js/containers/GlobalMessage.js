@@ -2,6 +2,7 @@ import React, {PropTypes, Component} from 'react'
 import {connect} from 'react-redux'
 import {hideMessage} from '../actions/MessageActions'
 import Snackbar from 'material-ui/Snackbar'
+import styles from '../styles'
 
 class GlobalMessage extends Component {
   constructor(props){
@@ -18,13 +19,13 @@ class GlobalMessage extends Component {
         message={message.message}
         autoHideDuration={3000}
         onRequestClose={this.handleRequestClose}
+        bodyStyle={{backgroundColor: styles.colors.textBase}}
         />
     )
   }
 
   handleRequestClose(){
     const {dispatch, hideMessage} = this.props
-
     dispatch(hideMessage())
   }
 }

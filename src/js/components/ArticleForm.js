@@ -1,6 +1,8 @@
 import React, {PropTypes, Component} from 'react'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
+import styles from '../styles'
 
 const ArticleForm = (props) => {
   return (
@@ -8,15 +10,16 @@ const ArticleForm = (props) => {
       <TextField
         fullWidth={true}
         multiLine={true}
-        hintText="1行目はタイトルです"
-        hintStyle={{fontSize: "0.9em"}}
+        underlineFocusStyle={{borderColor: styles.colors.secondary}}
+        hintText="Input here."
         onChange={props.onBodyChange}
         value={props.body}
         />
 
       <RaisedButton
         style={{width: "100%"}}
-        primary={true}
+        backgroundColor={styles.colors.primary}
+        labelStyle={{color: styles.colors.textInverse}}
         label="save"
         disabled={props.body.trim() === ""}
         onClick={props.onSubmit}

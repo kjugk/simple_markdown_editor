@@ -2,6 +2,7 @@ import React, {PropTypes, Component} from 'react'
 import IconButton from 'material-ui/IconButton'
 import SvgIcon from 'material-ui/SvgIcon'
 import AddCircle from 'material-ui/svg-icons/content/add-circle'
+import styles from '../../styles'
 
 const CreateArticleButton = (props) => {
   return (
@@ -11,7 +12,7 @@ const CreateArticleButton = (props) => {
       onClick={props.onClick}
       >
       <SvgIcon>
-        <AddCircle color="rgb(0, 188, 212)"/>
+        <AddCircle color={styles.colors.primary}/>
       </SvgIcon>
     </IconButton>
   )

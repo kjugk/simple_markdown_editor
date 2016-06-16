@@ -8,7 +8,7 @@ import EditArticleButton from '../components/buttons/EditArticleButton'
 import DeleteArticleButton from '../components/buttons/DeleteArticleButton'
 import TagButton from '../components/buttons/TagButton'
 import {getAllTags} from '../selectors'
-import styles from '../components/styles'
+import styles from '../styles'
 
 class VerticalMenu extends Component {
   constructor(props){
@@ -26,8 +26,8 @@ class VerticalMenu extends Component {
       <div className="l-vertical-menu">
         <CreateArticleButton
           onClick={this.handleCreateClick}
-          style={styles.small}
-          iconStyle={styles.smallIcon}
+          style={styles.button.small}
+          iconStyle={styles.button.smallIcon}
           />
         <TagButton
           disabled={tags.isEmpty()}

@@ -2,10 +2,10 @@ import React, {PropTypes, Component} from 'react'
 import IconButton from 'material-ui/IconButton'
 import SvgIcon from 'material-ui/SvgIcon'
 import Delete from 'material-ui/svg-icons/action/delete'
-import styles from '../styles'
+import styles from '../../styles'
 
 const DeleteArticleButton = (props) => {
-  let color = props.disabled ? "grey" : "#000000"
+  let color = props.disabled ? "grey" : styles.colors.textBase
 
   return (
     <div>
@@ -19,7 +19,7 @@ const DeleteArticleButton = (props) => {
           <Delete color={color} />
         </SvgIcon>
       </IconButton>
-      <div style={{...styles.buttonLabel, color}}>delete</div>
+      <div style={{...styles.button.buttonLabel, color}}>delete</div>
     </div>
   )
 }

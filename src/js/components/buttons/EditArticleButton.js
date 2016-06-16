@@ -2,10 +2,10 @@ import React, {PropTypes, Component} from 'react'
 import IconButton from 'material-ui/IconButton'
 import SvgIcon from 'material-ui/SvgIcon'
 import Edit from 'material-ui/svg-icons/image/edit'
-import styles from '../styles'
+import styles from '../../styles'
 
 const EditArticleButton = (props) => {
-  let color = props.disabled ? "grey" : "#000000"
+  let color = props.disabled ? "grey" : styles.colors.textBase
 
   return (
     <div>
@@ -19,7 +19,7 @@ const EditArticleButton = (props) => {
           <Edit color={color} />
         </SvgIcon>
       </IconButton>
-      <div style={{...styles.buttonLabel, color}}>edit</div>
+      <div style={{...styles.button.buttonLabel, color}}>edit</div>
     </div>
   )
 }

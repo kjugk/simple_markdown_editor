@@ -2,6 +2,7 @@ import React, {PropTypes, Component} from 'react'
 import IconButton from 'material-ui/IconButton'
 import SvgIcon from 'material-ui/SvgIcon'
 import Add from 'material-ui/svg-icons/content/add'
+import styles from '../../styles'
 
 const AddButton = (props) => {
   return (
@@ -12,7 +13,7 @@ const AddButton = (props) => {
       disabled={props.disabled}
       >
       <SvgIcon>
-        <Add color={"#000000"} />
+        <Add color={styles.colors.textBase} />
       </SvgIcon>
     </IconButton>
   )

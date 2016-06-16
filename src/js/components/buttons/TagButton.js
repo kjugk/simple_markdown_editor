@@ -2,10 +2,10 @@ import React, {PropTypes, Component} from 'react'
 import IconButton from 'material-ui/IconButton'
 import SvgIcon from 'material-ui/SvgIcon'
 import LocalOffer from 'material-ui/svg-icons/maps/local-offer'
-import styles from '../styles'
+import styles from '../../styles'
 
 const TagButton = (props) => {
-  let color = props.disabled ? "grey" : "#000000"
+  let color = props.disabled ? "grey" : styles.colors.textBase
 
   return (
     <div>
@@ -19,7 +19,7 @@ const TagButton = (props) => {
           <LocalOffer color={color} />
         </SvgIcon>
       </IconButton>
-      <div style={{...styles.buttonLabel, color}}>tags</div>
+      <div style={{...styles.button.buttonLabel, color}}>tags</div>
     </div>
   )
 }

@@ -6,6 +6,7 @@ import {getAllTags} from '../selectors'
 import {selectTag, toggleDrawer} from '../actions/TagActions'
 import LocalOffer from 'material-ui/svg-icons/maps/local-offer'
 import Badge from 'material-ui/Badge'
+import styles from '../styles'
 
 class TagDrawer extends Component {
   render(){
@@ -35,8 +36,8 @@ class TagDrawer extends Component {
         <ListItem
           key={i++}
           primaryText={t}
-          leftIcon={<LocalOffer />}
-          rightIcon={<Badge secondary={true} badgeContent={count} />}
+          leftIcon={<LocalOffer color="#3D4044" />}
+          rightIcon={<Badge badgeStyle={{backgroundColor: styles.colors.primary, color: styles.colors.textInverse}} badgeContent={count} />}
           onTouchTap={()=>{
             dispatch(selectTag(t))
             dispatch(toggleDrawer())

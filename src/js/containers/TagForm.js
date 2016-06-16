@@ -1,10 +1,10 @@
 import React, {PropTypes, Component} from 'react'
 import {connect} from 'react-redux'
 import {addTag, deleteTag} from '../actions/ArticleFormActions'
-import styles from '../components/styles'
 import LocalOffer from 'material-ui/svg-icons/maps/local-offer'
 import Tag from '../components/Tag'
 import TagInput from '../components/TagInput'
+import styles from '../styles'
 
 class TagForm extends Component {
   constructor(props){
@@ -19,7 +19,7 @@ class TagForm extends Component {
   render(){
     return (
       <section className="l-tag-form" >
-        <LocalOffer />
+        <LocalOffer color={styles.colors.textBase} />
 
         {this.props.tags.map((tag, i) => {
           return(

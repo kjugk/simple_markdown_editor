@@ -1,14 +1,15 @@
 import React, {PropTypes, Component} from 'react'
 import TextField from 'material-ui/TextField'
 import AddButton from '../components/buttons/AddButton'
+import styles from '../styles'
 
 const TagInput = (props) => {
   return (
     <div>
       {props.isEditing &&
         <TextField
-          name="hoge"
           style={{marginLeft: "8px", width: "100px"}}
+          underlineFocusStyle={{borderColor: styles.colors.secondary}}
           onBlur={props.onBlur}
           onKeyDown={props.onKeyDown}
           autoFocus={true}
