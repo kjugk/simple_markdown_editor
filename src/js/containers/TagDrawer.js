@@ -5,10 +5,11 @@ import {List, ListItem} from 'material-ui/List'
 import {getAllTags} from '../selectors'
 import {selectTag, toggleDrawer} from '../actions/TagActions'
 import LocalOffer from 'material-ui/svg-icons/maps/local-offer'
+import Badge from 'material-ui/Badge'
 
 class TagDrawer extends Component {
   render(){
-    const {open, dispatch, selectTag, selectDrawer} = this.props
+    const {open, dispatch, toggleDrawer} = this.props
 
     return (
       <Drawer
@@ -19,27 +20,37 @@ class TagDrawer extends Component {
         }}
         >
         <List>
-          {this.props.tags.map((t, i)=>{
-            return(
-              <ListItem
-                key={i}
-                primaryText={t}
-                leftIcon={<LocalOffer color="#000000"/>}
-                onTouchTap={()=>{
-                  dispatch(selectTag(t))
-                  dispatch(toggleDrawer())
-                }}
-                />
-            )
-          })}
+          {this.renderListItems()}
         </List>
       </Drawer>
     )
   }
+
+  renderListItems(){
+    const {allTags, dispatch, selectTag, toggleDrawer} = this.props
+    let listItems = [], i = 0
+
+    allTags.forEach((count, t) => {
+      listItems.push(
+        <ListItem
+          key={i++}
+          primaryText={t}
+          leftIcon={<LocalOffer />}
+          rightIcon={<Badge secondary={true} badgeContent={count} />}
+          onTouchTap={()=>{
+            dispatch(selectTag(t))
+            dispatch(toggleDrawer())
+          }}
+          />
+      )
+    })
+
+    return listItems
+  }
 }
 
 TagDrawer.propTypes = {
-  tags: PropTypes.object.isRequired,
+  allTags: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   selectTag: PropTypes.func.isRequired,
   toggleDrawer: PropTypes.func.isRequired
@@ -47,7 +58,7 @@ TagDrawer.propTypes = {
 
 function mapStateToProps(state){
   return{
-    tags: getAllTags(state),
+    allTags: getAllTags(state),
     open: state.tag.get('isDrawerOpen'),
     selectTag,
     toggleDrawer

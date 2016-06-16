@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect'
+import {createSelector} from 'reselect'
 import moment from 'moment'
 import Immutable from 'immutable'
 
@@ -7,7 +7,7 @@ const getArticles = (state) => state.articles.items
 const getSelectedTag = (state) => state.tag.get('selectedTag')
 
 export const getSelectedArticle = createSelector(
-  [ getSelectedId, getArticles ],
+  [getSelectedId, getArticles],
   (selectedId, articles) => {
     return articles.filter(a => a.id === selectedId).first() || {}
   }
@@ -15,7 +15,7 @@ export const getSelectedArticle = createSelector(
 
 //TODO sort順のstateで、ロジックを分ける
 export const getSordedArticles = createSelector(
-  [ getArticles ],
+  [getArticles],
   (articles) => {
     return articles.sort((a, b) => {
       return moment(a.updatedAt).isBefore(b.updatedAt) ? 1 : -1
@@ -24,7 +24,7 @@ export const getSordedArticles = createSelector(
 )
 
 export const getArticlesByTag = createSelector(
-  [ getSordedArticles, getSelectedTag ],
+  [getSordedArticles, getSelectedTag],
   (articles, tag) => {
     if(tag === ""){
       return articles
@@ -38,11 +38,20 @@ export const getArticlesByTag = createSelector(
 )
 
 export const getAllTags = createSelector(
-  [ getArticles ],
+  [getArticles],
   (articles) => {
-    let tags = Immutable.Set([])
+    let memo = []
+    let tags = Immutable.Map()
+
     articles.forEach((a) => {
-      tags = tags.concat(a.tags)
+      a.tags.forEach((t)=>{
+        if(memo.indexOf(t) < 0){
+          memo.push(t)
+          tags = tags.set(t, 1)
+        } else {
+          tags = tags.set(t, tags.get(t) + 1)
+        }
+      })
     })
 
     return tags

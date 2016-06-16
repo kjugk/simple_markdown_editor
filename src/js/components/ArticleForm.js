@@ -15,7 +15,7 @@ const ArticleForm = (props) => {
         />
 
       <RaisedButton
-        className="fullWidth"
+        style={{width: "100%"}}
         primary={true}
         label="save"
         disabled={props.body.trim() === ""}

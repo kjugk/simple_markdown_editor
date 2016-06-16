@@ -23,7 +23,7 @@ html, body{
   padding: 0;
 }
 
-body{
+body, input, textarea{
   font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -83,10 +83,6 @@ h1, h2, h3, h4{
 
 .fullHeight{
   height: 100%;
-}
-
-.fullWidth{
-  width: 100%;
 }
 
 .label{
