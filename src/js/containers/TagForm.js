@@ -18,10 +18,7 @@ class TagForm extends Component {
 
   render(){
     return (
-      <section
-        style={{minHeight: "50px", paddingLeft: "8px", borderBottom: "1px solid #EEEEEE"}}
-        className="flex-container flex-align-center flex-wrap"
-        >
+      <section className="l-tag-form" >
         <LocalOffer />
 
         {this.props.tags.map((tag, i) => {

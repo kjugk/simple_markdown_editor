@@ -9,8 +9,14 @@ import TagForm from '../containers/TagForm'
 class ArticleEditor extends Component{
   constructor(props){
     super(props)
+    this.state = {viewHeight: 0}
+    this.handleResize = this.handleResize.bind(this)
     this.handleBodyChange = this.handleBodyChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleResize(e) {
+    this.setState({viewHeight: window.innerHeight - this.refs.viewer.offsetTop})
   }
 
   componentDidMount(){
@@ -19,6 +25,8 @@ class ArticleEditor extends Component{
     if(!!params.articleId){
       dispatch(initForm(params.articleId))
     }
+    this.setState({viewHeight: window.innerHeight - this.refs.viewer.offsetTop})
+    window.addEventListener('resize', this.handleResize)
   }
 
   componentDidUpdate(){
@@ -28,6 +36,7 @@ class ArticleEditor extends Component{
   }
 
   componentWillUnmount(){
+    window.removeEventListener('resize', this.handleResize)
     this.props.dispatch(this.props.clearForm())
   }
 
@@ -35,8 +44,8 @@ class ArticleEditor extends Component{
     const { articleForm, dispatch } = this.props
 
     return(
-      <div className="fullHeight">
-        <div className="fullHeight col-xs-6 no-gutter" style={{borderRight: "1px solid #EEE"}}>
+      <div ref="viewer" style={{height: this.state.viewHeight}}>
+        <div className="fullHeight col-xs-6 no-gutter" style={{borderRight: "1px solid #EEE", overflow: "scroll"}}>
           <TagForm />
 
           <ArticleForm
@@ -46,7 +55,7 @@ class ArticleEditor extends Component{
             />
         </div>
 
-        <div className="col-xs-6 no-gutter">
+        <div className="col-xs-6 no-gutter fullHeight">
           <ArticlePreview articleBody={articleForm.get('body')} />
         </div>
       </div>

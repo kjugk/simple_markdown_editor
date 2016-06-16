@@ -41,7 +41,7 @@ const getTitle = (body) => {
 }
 
 const getClassName = (item, selectedId) => {
-  return item.id === selectedId ? "selected" : ""
+  return item.id === selectedId ? "is-selected" : ""
 }
 
 ArticleList.propTypes = {

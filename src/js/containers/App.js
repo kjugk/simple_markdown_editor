@@ -12,16 +12,18 @@ class App extends Component {
   render(){
     const { dispatch, articles, children } = this.props
     return(
-      <div className="fullHeight">
-        <header style={{borderBottom: "1px solid #eeeeee", padding: "20px 6px 10px 6px"}}>
+      <div className="l-container">
+        <header className="l-header">
           <h2>Simple Markdown Editor</h2>
-          <div style={{textAlign: "right"}}>
+          <div>
             <a href="https://github.com/kjugk/simple_markdown_editor">source</a>
           </div>
         </header>
 
-        {articles.isFetching && <Progress />}
-        {!articles.isFetching && children}
+        <div className="l-content">
+          {articles.isFetching && <Progress />}
+          {!articles.isFetching && children}
+        </div>
       </div>
     )
   }

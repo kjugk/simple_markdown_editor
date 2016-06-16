@@ -22,7 +22,7 @@ class HorizontalMenu extends Component {
     const{ articles, tags } = this.props
 
     return(
-      <div className="horizontal-menu flex-container flex-align-center" >
+      <div className="l-horizontal-menu flex-container flex-align-center" >
         <div style={{marginRight: "12px"}}>
           <CreateArticleButton
             onClick={this.handleCreateClick}

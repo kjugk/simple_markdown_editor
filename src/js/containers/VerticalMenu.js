@@ -20,10 +20,10 @@ class VerticalMenu extends Component {
   }
 
   render(){
-    const{ articles, tags } = this.props
+    const{articles, tags} = this.props
 
     return(
-      <div className="vertical-menu fullHeight">
+      <div className="l-vertical-menu">
         <CreateArticleButton
           onClick={this.handleCreateClick}
           style={styles.small}

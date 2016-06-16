@@ -13,6 +13,21 @@ import {selectTag} from '../actions/TagActions'
 import {getSelectedArticle, getSordedArticles, getAllTags, getArticlesByTag} from '../selectors'
 
 class ArticleViewer extends Component{
+  constructor(props){
+    super(props)
+    this.state = {viewHeight: 0}
+    this.handleResize = this.handleResize.bind(this)
+  }
+
+  handleResize(e) {
+    this.setState({viewHeight: window.innerHeight - this.refs.viewer.offsetTop})
+  }
+
+  componentDidMount(){
+    this.setState({viewHeight: window.innerHeight - this.refs.viewer.offsetTop})
+    window.addEventListener('resize', this.handleResize)
+  }
+
   componentDidUpdate(){
     const {items, articles, dispatch, selectArticle} = this.props
 
@@ -21,14 +36,18 @@ class ArticleViewer extends Component{
     }
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize)
+  }
+
   render(){
     const{articles, items, selectedArticle, selectedTag, selectArticle, selectTag, dispatch} = this.props
 
     return(
-      <div className="fluid-container fullHeight">
+      <div className="fluid-container">
         <HorizontalMenu />
 
-        <div className="col-xs-6 col-lg-4 no-gutter article-list-box fullHeight">
+        <div ref="viewer" className="col-xs-6 col-lg-4 no-gutter l-article-list" style={{overflow: "scroll", height: this.state.viewHeight}}>
           <VerticalMenu />
 
           <div style={{overflow: "hidden"}}>
